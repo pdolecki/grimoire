@@ -1,59 +1,36 @@
-# Grimoire
+# 🧙 Grimoire – A magical grimoire of developer knowledge.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.0.
+Live Demo: https://pd-grimoire.netlify.app
 
-## Development server
+**Crpt** is a lightweight Angular 20 application for learning new developer tools and storing all of my knowledge. It uses modern Angular features and applies best practises in architecture, Angular Material, and performance.
 
-To start a local development server, run:
+App generated with:
+> ng new grimoire --defaults --style=scss --standalone --routing --inline-template --inline-style
 
-```bash
-ng serve
-```
+## 🚀 Features
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- 📈 Character development calculators
+- 🧠 Clean reactive store using Angular 20 signals & `httpResource`
+- 🧮 Ability to search informations on talents, skills, effects etc.
+- 📦 Lazy loaded components, to make UI load faster
+- 💅 Styling based on Angular Material custom theme
 
-## Code scaffolding
+## 🛠️ Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Angular 20 Zoneless**
+- **Custom components and styling**
+- **RxJS Signals & Computed Store**
+- **httpResource** for declarative HTTP
+- **Type-safe architecture with interfaces**
 
-```bash
-ng generate component component-name
-```
+## 🧪 Unit Testing
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Since Angular 20 new default testing is now being done using Jest/Web Runner and the current documentation is lacking information about zoneless testing I've decided to go without testing as of now. (I'm going to come back to this when there will be a clear, supported by Angular way for testing zoneless apps with Karma decomissioned)
 
-```bash
-ng generate --help
-```
+## 🧑‍💻 Getting Started
 
-## Building
+Install dependencies:
+> npm install
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Run project:
+> npm start

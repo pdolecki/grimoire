@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Button } from '../shared/ui/button';
 import { Card } from '../shared/ui/card';
 import { FLASH_CARDS } from '../shared/constants/flash-cards';
@@ -6,6 +6,7 @@ import { FlashCard } from '../shared/interfaces/flash-card';
 
 @Component({
   selector: 'app-home',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Button, Card],
   template: `
     <div class="home">

@@ -1,9 +1,16 @@
-import { Component, effect, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  input,
+  signal,
+} from '@angular/core';
 import { Button } from './button';
 
 @Component({
   selector: 'app-card',
   imports: [Button],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="card bg-box">
       <p class="card-title">{{ question() }}</p>

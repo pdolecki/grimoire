@@ -25,6 +25,7 @@ import { FlashCard } from '../shared/interfaces/flash-card';
       justify-content: center;
       align-items: center;
       gap: 2rem;
+      padding: 1rem;
     }
   `,
 })

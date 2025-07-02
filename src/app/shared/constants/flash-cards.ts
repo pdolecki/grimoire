@@ -2,7 +2,7 @@ import { FlashCard } from '../interfaces/flash-card';
 
 export const FLASH_CARDS: FlashCard[] = [
   {
-    question: 'What is hoisting in JavaScript',
+    question: 'What is hoisting in JavaScript?',
     answer: `
     Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope during the compilation phase, before code execution. Only declarations are hoisted — not initializations.
     - var is hoisted and initialized with undefined, so it can be referenced before its declaration (though it’s usually a bad idea).
@@ -371,7 +371,7 @@ export const FLASH_CARDS: FlashCard[] = [
     `,
   },
   {
-    question: 'What is Domain Driven Design',
+    question: 'What is Domain Driven Design?',
     answer: `
     DDD is a software design approach focused on modeling software based on real business domains, using ubiquitus language and organizing code around the business logic, not technical layers.
 
@@ -421,10 +421,408 @@ export const FLASH_CARDS: FlashCard[] = [
     In Angular we rarly manipulate the DOM directly, instead we use Angular own abstarction (Renderer, ViewRef, etc.) and handle DOM updates efficiently through change detection.
     `,
   },
-  // {
-  //   question: '',
-  //   answer: ``,
-  // },
+  {
+    question: 'What are Promises, Observables and Subjects?',
+    answer: `
+    Promise - represents a single future value from an asynchronous operation (e.g. HTTP call, file read). Key features:
+    - Eager (starts executing immediately)
+    - One-time (can resolve then or reject catch only once)
+    - Chaining (supports chaining with .then and .catch)
+
+    Observable - stream of asynchronous values. It can emit multiple values over time. Key features:
+    - Lazy (starts when subscribed)
+    - Multi-value (can emit values multiple times)
+    - Supports Operators (like map, filter, switchMap)
+    - Cancellable (can unsubscribe)
+
+    Subject - It is both an Observable and an Observer. It allows multicasting - pushing values to multiple subscribers. Key features:
+    - Can manually emit values (next)
+    - Used for cross-component communication
+    - Can act as a bridge between imperative and reactive code
+    Types of Subjects:
+    - Subject (basic version)
+    - BehaviorSubject (holds a current value, great for state)
+    - ReplaySubject (replays past values to new subscribers)
+    - AsyncSubject (only emits the last value on completion)
+    `,
+  },
+  {
+    question:
+      'What are Resolvers and Interceptors in Angular? How do they differ?',
+    answer: `
+    Resolver - service that runs before a route is activated. It fetches data in advance and makes it available to the component via the ActivatedRoute. It's defined in the route configuration with the resolve key, and it ensures that your component gets the data immediately on load, not ofter it has rendered.
+    Use Case:
+    You want to load required data (like a user profile or article content) before diplaying a route).
+
+    When it runs?
+    1. Resolver - before a route is activated
+    2. Interceptor - before/after every HTTP request/response
+
+    Where it's used?
+    1. Resolver - in routing configuration
+    2. Interceptor - globally in HTTP layer
+
+    Purpose?
+    1. Resolver - pre-fetch data required by a component
+    2. Interceptor - modify HTTP requests/responses (auth, logs)
+
+    Data Access?
+    1. Resolver - ActivatedRoute (e.g. route.data['user'])
+    2. Interceptor - transparent, affects all HTTP calls
+    `,
+  },
+  {
+    question: 'WEB Workers and Service Workers in Javascript?',
+    answer: `
+    A WEB Worker allows you to run JavaScript in a background thread, separate from the main UI thread. Use them to offload CPU-heavy tasks (like calculations, parsing large data, etc.) so your app doesn't freeze or become unresponsive.
+    - they do not have access to the DOM
+    - they communicate with the main thread via postMessage
+    - you can create them using the Worker constructor and pass in a script
+
+    A Service Worker is a type of proxy that runs in the background, independent of your web page, and intercepts network requests. We use them to enable offline support, cache assets or API responses, create PWAs, handle background sync and push notifications.
+    - they operate between the browser and network
+    - they run in a separate thread
+    - they can intercept and cache network requests using the Cache API
+    - they require HTTPS (except on localhost)
+    They have lifecycle of register > install > activate > fetch (events).
+    `,
+  },
+  {
+    question:
+      'If we have in Angular service provided in root, but we add it to the providers array of standalone component - will it be the same instance as globally or a new one? Will it survive if the component gets destroyed?',
+    answer: `
+    Angular will create a new instance of the service scoped to the component. It will not reuse the global singleton from the root injector.
+    Furthermore, this new instance will be destroyed when the component is destroyed, unless other components in the same injector tree are still using it.
+    `,
+  },
+  {
+    question: 'What are Promises, how can you cancel a Promise in JavaScript?',
+    answer: `
+    Promise is a built-in JS object that represents the eventual completion (or failure) of an asynchronous operation. It has 3 states:
+    - pending (initial state)
+    - fulfilled (operation completed successfully)
+    - rejected (operation failed)
+
+    Promises cannot be canceled natively once started. However we can simulate cancellation using:
+    - AbortController
+    - Custom Cancelable Promise Wrapper
+    It doesn't stop underlying task, just prevents .then() from resolving
+    `,
+  },
+  {
+    question: 'What is async/await in JavaScript?',
+    answer: `
+    async/await is syntatic sugar over Promises. It makes asynchronous code look and behave like synchronous code.
+    - await pauses execution unil the Promise settles
+    - can only be used inside async function
+    - handles error with try catch block
+    `,
+  },
+  {
+    question: 'What is Overloading in JavaScript and Angular?',
+    answer: `
+    Overloading - refers to defining multiple function signatures with the same name but different parameters (type, number, or both). It helps make code more flexible and expressive, depending on how a function is called. Use for:
+    - to handle different input types or formats in one function
+    - to improve readability and reduce code duplication
+
+    JavaScript 
+    Does not support real function overloading, it will just override declaration of function with the last one. We can simulate it using function with else-if blocks checking arguments.length and typeof arguments.
+
+    TypeScript (Angular also)
+    Supports overloading, you can define multiple signatures.
+    `,
+  },
+  {
+    question: 'What is @defer in Angular?',
+    answer: `
+    @defer is a block-based syntax that lets you lazy-load parts of the UI only when needed, without extra routing or manual logic.
+    It allows Angular to delay rendering a block of HTML until a certain condition or trigger occurs - improving performance, especially in large apps.
+    You can use triggers:
+    - @defer (on idle) {}
+    Or you can go with basic syntax:
+    - @defer{}@placeholder{}@error{}@loading{}
+    `,
+  },
+  {
+    question:
+      'What is content projection in Angular? Can we project multiple things?',
+    answer: `
+    Content Projection is the mechanism Angular uses to pass content from a parent component into a child component's template.
+    It's like putting custom content inside a component - think of it like slot in Web Components or ng-content in Angular.
+
+    You can put multiple pieces of content using multiple slots. Angular uses attribute selectors in select="" to decide what content goes where.
+    In component:
+    <header><ng-content select="[title]"></ng-content></header>
+    <section><ng-content select="[body]"></ng-content></section>
+    In usage:
+    <h1 title>This is the title</h1>
+    <p body>This is the body</p>
+    `,
+  },
+  {
+    question:
+      'What is the difference between ng-container and ng-template in Angular?',
+    answer: `
+    ng-container:
+    Use to group elements without cluttering the DOM.
+    - no extra DOM element (invisible wrapper)
+    Think about it as invisible div.
+    <ng-container *ngIf="isLoggedIn">
+      <h1>Welcome!</h1>d
+    </ng-container>
+
+    ng-template:
+    Use to define templates that can be reused or rendered conditionally later.
+    - not rendered at all (unless explicit use e.g. ngTemplateOutlet)
+    Think about it as Saved snippet of HTML logic for later use
+    <ng-template #loading>
+      <p>Loading...</p>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="loading"></ng-container>
+    `,
+  },
+  {
+    question:
+      'What happens to a Promise/Observable/Subject when triggered by a component (e.g. HTTP call) and the component is destroyed by navigation before it returns?',
+    answer: `
+    Promise
+    It cannot be canceled, if component triggers it (e.g. via fetch() or async/await) and navigates away:
+    - the Promise will still resolve or reject, regardless of the component's destruction
+    - if the result is used to update the destroyed component it may cause ExpressionChangedAfterItHasBeenChecked errors or memory leaks (especially in manual logic or setState scenarios)
+
+    Observable
+    It can be canceled by unsubscribing. If you trigger HTTP call, the Observable starts emitting only after subscription. 
+    - If you do not unsubscribe manually and the observable emits after component is destroyed Angular won't throw, but it can lead to memory leaks or unintended behavior.
+
+    Subject
+    Subject is a mutlicast stream - it doesn't automatically complete or stop. If you subscribed to a Subject inside the component and don't unsubscribe:
+    - emissions will still arrive, even after the component is destroyed
+    - this can cause leaks or trying to update destroyed views
+    `,
+  },
+  {
+    question: 'What are common RxJS operators and what they do?',
+    answer: `
+    Mostly used operators:
+
+    1. Creation Operators
+    - of(...values) - creates observables from static values
+    - from(array | promise) - creates from iterable or promise
+
+    2. Transformation Operators
+    - map(fn) - transforms emitted values
+    - switchMap(fn) - cancels previous inner observable when new value arrives
+    - mergeMap(fn) - flattens and runs all inner observables in parallel
+    - concatMap(fn) - queues inner observables and runs them one-by-one
+    - exhaustMap(fn) - ignores new emissions while the previous one is running
+
+    3. Filtering Operators
+    - filter(fn) - passes through only values matching condition
+    - take(n) - takes the first n value then completes
+    - takeUntil(notifiers$) - completes observable when another emits
+    - debounceTime(ms) - waits for ms pause in emissions
+    - distinctUntilChanged() - skips repeated values
+
+    4. Combination Operators
+    - combineLatest([a$, b$]) - emits when any source emits with latest values
+    - forkJoin([a$, b$]) - waits for all observables to complete, then emits once
+    - withLatestFrom(other$) - combines current value with latest from another stream
+    - zip(a$, b$) - emits only when all observables emit once, in order
+
+    5. Error Handling Operators
+    - catchError(fn) - handle errors and return fallback or rethrow
+    - retry(n) - retry the source on error up to n times
+
+    6. Utlility Operators
+    - tap(fn) - for side effects, doesn't modify the value
+    - finalize(fn) - runs when observable completes or errors
+    - delay(ms) - delays each emission
+    `,
+  },
+  {
+    question:
+      'What are WebSockets? How do they differ from HTTP? Some additional informations?',
+    answer: `
+    WebSocket is a communication protocol that provides a persistent, full-duplex connection between the client (browser) and server. It's perfect for real-time applications like live chats, live dashboards, multiplayer games, collaborative apps (like google docs).
+
+    How is it different from HTTP?
+    1. They are based on persistent connection (vs request-response only).
+    2. Direction is 2 way, client and server (vs one way, client to server).
+    3. They have low overhead after initial handshake (vs high).
+    4. They have very low latency (vs higher).
+    5. They are used for real-time apps (vs static websites, APIs).
+
+    Alternatives or Complements
+    1. Socket.IO - JS library that simplifies WebSocket usage and adds fallbacks (like long polling).
+    2. Firebase Realtime Database - Real time backend-as-a-service.
+    `,
+  },
+  {
+    question:
+      'You have a search field above a data table. Every time user types, it triggers a backend API call. There are too many requests. How would you handle this problem in Angular?',
+    answer: `
+    The most straightforward way would be to use RXJS:
+    this.searchControl.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap((value) => this.backendService.search(value))
+    ).subscribe((results) => {
+      this.tableData = results;
+    });
+
+    debounceTime(300) - waits 300ms after the user stops typing
+    distinctUntilChanged() - prevents duplicate calls for the same input
+    switchMap() - cancels previous request if a new one comes in
+
+    Additional UX enchancments:
+    - add a loading spinner while the request is pending
+    - handle empty strings
+    - optionally use a manual search button for very slow APIs
+    *** For big apps: cache results, use paginated responses, throttle scrolls
+    `,
+  },
+  {
+    question:
+      'You are building a login form in Angular. User click the Login button multiple times quickly, causing multiple API calls to the backend. How would you prevent this and ensure only one login attempt is processed?',
+    answer: `
+    Basic UI-based solution:
+    Disable the login button while the request is pending or add a loading spinner and set a flag guard in method sending request.
+
+    RxJS-based:
+    Use exhaustMap() to ensure only the first click is handled until that requests completes - all other clicks are ignored during that time.
+    `,
+  },
+  {
+    question:
+      'How would you handle a situation where the user keeps triggering data creation, causing multiple heavy backend requests to be fired - especially when each request takes a long time to complete?',
+    answer: `
+    1. Debounce the user input
+    If the trigger is based on user typing or interaction, wrap the event with a debounceTime (observables) or setTimeout debounce (for signals or event handlers).
+    this.form.valueChanges.pipe(
+      debounceTime(500),
+      switchMap((value) => this.api.createData(value))
+    ).subscribe();
+
+    2. Disable further trigger while waiting
+    Disable the form or interaction source while a request is in flight.
+    this.loading = true;
+    this.api.createData(data).subscribe({
+      next: () => this.loading = false,
+      error: () => this.loading = false
+    });
+
+    Additional UI ideas:
+    - use confirmation dialogs before sending final creation request
+    - visual feedback like loading spinners or disabling buttons
+    - consider auto-save logic with explicity Save button
+    `,
+  },
+  {
+    question: 'What are WEB Components? How they work?',
+    answer: `
+    Web Components are a set of standardized browser APIs that allow developers to create reusable, encapsulated custom elements - like your own HTML tags - that work natively across modern browsers without needing a framework.
+
+    They consist of 4 main technologies:
+    1. Custom Elements
+    - define your own HTML elements
+    - use class MyElement extends HTMLElement and customElements.define()
+    2. Shadow DOM
+    - provides encapsulation form styles and markup
+    - prevents styles from leaking in or out
+    - created using this.attachShadow({ mode: 'open' })
+    3. HTML Templates (<template>)
+    - define chunks of markup that aren't rendered until used
+    - paired with JS to clone and attach to the DOM
+    4. ES Modules
+    - import/export you rcomponents in a modular way
+    - enables reusability and lazy loading
+
+    Why to use Web Components?
+    - framework-agnostic (can be used in Angular, React, or plain HTML)
+    - encapsulated (styles and logic stay scoped)
+    - reusable & portable (build once, use anywhere)
+    - native to browser (no runtime or extra libraries required)
+    `,
+  },
+  {
+    question: 'What are Angular PWA?',
+    answer: `
+    An Angular Progressive Web App is a web application built with Angular that uses modern browser features to behave like a native app - it can work offline, load instantly, and be installed on a user's device (mobile or desktop).
+
+    Key Features of Angular PWAs:
+    1. Offline support
+    Uses a service worker to cache assets and API responses for offline use.
+    2. App-like experience
+    Can be installed and opened in full-screen like native apps.
+    3. Fast loading
+    Cached files load instantly, even on slow or no network.
+    4. Push notifications (optional)
+    Re-engage users with notifications.
+    5. Save
+    Must be served over HTTPS for security.
+    `,
+  },
+  {
+    question: 'What are core JS Collections?',
+    answer: `
+    1. Map
+    - Map allows keys of any type (including objects, functions)
+    - Maintains insertion order
+    - has .size, .set, .get, .has, .delete
+    - better for frequent additions/removals
+    2. Set
+    - A collection of unique values (no duplicates)
+    - Has .add, .has, .delete, .clear
+    - Great for deduplication, caching, filtering
+    3. WeakMap
+    - Keys must be objects
+    - Keys are weakly held (not preventable from garbage collection)
+    - No size or iteration (non-enumerable)
+    - Use: memory-safe stsorage for private data tied to DOM nodes or class instances
+    4. WeakSet
+    - Like Set but only for objects
+    - non-enumerable, weakly held
+    `,
+  },
+  {
+    question: 'How to optimize frontend on low-level?',
+    answer: `
+    1. Avoid Reflows/Repaints
+    - Use requestAnimationFrame for animations
+    - Batch DOM reads and writes
+    - Minimize layout thrashing (e.g. reading offsetHeight followed by a DOM write)
+    2. Efficient Data Structures
+    - Use Map/Set for faster lookups than arrays
+    - Debounce or throttle high-frequency events (e.g. resize, scroll, search)
+    3. Avoid memory leaks
+    - Clean up event listeners
+    - Unsubscribe from Observables (especially in Angular)
+    4. Use Web Workers (multi-threading)
+    - Offload heavy computation off the main thread
+    - Use postMessage() to cummunicate between worker and main thread
+    - Perfect for sorting, parsing, crunching large datasets
+    5. Lazy Load Modules, Images
+    - loading="lazy" for images
+    - Route-based code splitting in Angular
+    `,
+  },
+  {
+    question: 'What is multi-threading in JS?',
+    answer: `
+    JavaScript is single-threaded, but:
+    1. Web Workers
+    - separate background thread
+    - cannot access DOM
+    - used for calculations, compression, parsing
+    2. Service Workers
+    - proxy layer between web app and network
+    - used for caching, offline support, push notifications
+    3. Atomics and SharedArrayBuffer
+    - true shared memory and synchronization between threads
+    - advanced use case like rendering, image processing
+    `,
+  },
   // {
   //   question: '',
   //   answer: ``,

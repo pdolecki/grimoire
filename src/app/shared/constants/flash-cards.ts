@@ -823,10 +823,14 @@ export const FLASH_CARDS: FlashCard[] = [
     - advanced use case like rendering, image processing
     `,
   },
-  // {
-  //   question: '',
-  //   answer: ``,
-  // },
+  {
+    question: 'Ways of connecting JS to HTML?',
+    answer: ``,
+  },
+  {
+    question: 'What to use id or class selectors in HTML/CSS?',
+    answer: ``,
+  },
   // {
   //   question: '',
   //   answer: ``,

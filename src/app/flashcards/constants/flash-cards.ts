@@ -1,4 +1,4 @@
-import { FlashCard } from '../interfaces/flash-card';
+import { FlashCard } from "../interfaces/flash-card";
 
 export const FLASH_CARDS: FlashCard[] = [
   {

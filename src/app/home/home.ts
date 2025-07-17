@@ -1,46 +1,40 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { Button } from '../shared/ui/button';
-import { Card } from '../shared/ui/card';
-import { FLASH_CARDS } from '../shared/constants/flash-cards';
-import { FlashCard } from '../shared/interfaces/flash-card';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Button, Card],
+  imports: [RouterLink],
   template: `
     <div class="home">
-      <app-button [label]="'Draw'" (clicked)="draw()"></app-button>
-      <app-card
-        [question]="currentFlashCard().question"
-        [answer]="currentFlashCard().answer"
-      ></app-card>
+      <img src="favicon.svg" />
+      <h1>Grimoire</h1>
+      <p>A magical grimoire of developer knowledge</p>
+      <a routerLink="/flashcards"> Go to magic flashcards! </a>
     </div>
   `,
   styles: `
-    .home {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2rem;
-      padding: 1rem;
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 30%;
+      min-width: 320px;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.5));
     }
+    h1 {
+      font-size: 4rem;
+      color: #8eefff;
+      letter-spacing: 3px;
+    }
+    p {
+      font-size: 1.5rem;
+      font-style: italic;
+      text-align: center;
+    }
+  }
   `,
 })
-export default class Home {
-  private readonly FLASH_CARDS = FLASH_CARDS;
-  protected readonly currentFlashCard = signal<FlashCard>(
-    this.getRandomFlashCard()
-  );
-
-  protected draw() {
-    this.currentFlashCard.set(this.getRandomFlashCard());
-  }
-
-  private getRandomFlashCard(): FlashCard {
-    const randomIndex = Math.floor(Math.random() * this.FLASH_CARDS.length);
-    return this.FLASH_CARDS[randomIndex];
-  }
-}
+export default class Home {}

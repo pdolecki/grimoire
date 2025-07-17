@@ -4,62 +4,66 @@ export const FLASH_CARDS: FlashCard[] = [
   {
     question: 'What is hoisting in JavaScript?',
     answer: `
-    Hoisting in JavaScript means that variable and function declarations are moved to the top of their scope during the compilation phase, before code execution. Only declarations are hoisted — not initializations.
-    - var is hoisted and initialized with undefined, so it can be referenced before its declaration (though it’s usually a bad idea).
-    - let and const are hoisted too, but placed in the Temporal Dead Zone — referencing them before the declaration line throws a ReferenceError.
-    - function declarations are fully hoisted and can be called before their definition.
-    - function expressions (especially those declared with let or const) are treated like variables: only the variable name is hoisted — not the function body — so calling them early results in a TypeError.
+    Hoisting in JS means that variable and function declarations (not initializations) are moved to the top of their scope during compilation phase (before execution).
+    1. var:
+    - hoisted and initialized with undefined
+    - it can be referenced before declaration
+    2. let, const:
+    - hoisted, but placed in Temporal Dead Zone
+    - referencing before declaration throws a ReferenceError
+    3. function declarations:
+    - fully hoisted 
+    - can be called before their definition
+    4. function expression:
+    - treated like variables, only name is hoisted
+    - calling them early results in TypeError
     `,
   },
   {
     question: 'What is clousure in JavaScript and how can it be useful?',
     answer: `
-    A closure is a function that remembers the variables from the scope in which it was created - even after that outer scope has finished execution.
-    This happens because functions in JavaScript form a lexical closure; they caputre and retain access to their surrounding scope at the time they are defined.
-    In Angular we use that for creating private variables in services, building factory functions, managing callback state (setTimeout, eventListeners, or RxJS operators).
+    A clousure is a function that remembers the variables from the scope in which it was created. It applies even after the outer scope has finished execution.
+    Extra info:
+    - that is caused by JS functions forming a lexical closure (capture and retain access to their surrounding scope at the time of definition)
+    - in Angular we use that for creating private variables in services, building factory functions, managing callback state
     `,
   },
   {
     question: 'How can you manage/propagate state in Angular?',
     answer: `
-    Component State (Local)
-    Best for local, short-lived data - use signals, component properties or RxJS subjects.
-
-    Input, Output
-    Good for parent-child communication - pass data using input, output and event emitter.
-
-    Shared Service
-    Ideal for cross-component or feature-wide state - use RxJS BehaviorSubject or Signals.
-
-    NgRx or SignalStore
-    For complex apps use Redux Pattern - central store holds state, actions, reducers and selectors are used for management.
-
-    RouterState 
-    Useful for preserving context between views - Angular router can carry state via route parameters, query params or NavigationExtras.
+    1. Component State (local)
+    - best for local, short-lived data
+    - use signals, component properties or RxJS subjects
+    2. Input, Output
+    - good for parent-child communication
+    - using input/output and event emitter
+    3. Shared Service
+    - ideal for cross-component or feature-wide state
+    - use RxJS BehaviorSubject or Signals
+    4. NgRx or SignalStore
+    - for complex apps use Redux Pattern 
+    - central state store, actions, reducers and selectors
+    5. RouterState
+    - useful for preserving context between views
+    - Angular router can carry state via route parameters, query params or Navigation Extras
     `,
   },
   {
     question: 'What design patterns are used in Angular?',
     answer: `
-    Dependency Injection
+    1. Dependency Injection
     Services, tokens, modules are injected instead of being hardcoded. This promotes testability and separation of concerns.
-
-    Observer Pattern
+    2. Observer Pattern
     Used in RxJS and component communication. Observables notify subscribers when data changes.
-
-    Module Pattern
+    3. Module Pattern
     NgModules and standalone components encapsulate functionality and scope.
-
-    Facade Pattern
-    Common in state management (e.g. AuthFacade) to hide complexity of NgRx or SignalStore behind a clean API.
-
-    Strategy Pattern
+    4. Facade Pattern
+    Common in state management (e.g. AuthFacade) to hide complexity of dependencies (e.g. NgRx, SignalStore) behind a clean API.
+    5. Strategy Pattern
     Used when injecting different behaviors (e.g. different auth strategies). Can be implemented via interfaces + DI.
-
-    Signleton Pattern
-    Angular services provided in root or specific modules are singletons.
-
-    Template Pattern
+    6. Singleton Pattern
+    Angular Services provided in root or specific modules are singletos.
+    7. Template Pattern
     HTML templates define UI structure, with dynamic binding logic behind the scenes.
     `,
   },
@@ -230,7 +234,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     mergeMap - runs all inner observables in parallel. Use when you want to fire multiple requests and don't care about order (e.g. bulk saving multiple form entries).
     
-    concatMap = queues inner observables and runs them one after another in order. Use when order matters (e.g. submitting form steps or commands sequentially).
+    concatMap - queues inner observables and runs them one after another in order. Use when order matters (e.g. submitting form steps or commands sequentially).
     `,
   },
   {

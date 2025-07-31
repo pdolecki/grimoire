@@ -1,17 +1,85 @@
+:root {
+  // COLORS
+  --cl-primary: rgb(0, 255, 255);
+  --cl-primary-02: rgba(0, 255, 255, 0.2);
+  --cl-primary-06: rgba(0, 255, 255, 0.6);
+  --cl-primary-08: rgba(0, 255, 255, 0.8);
+
+  --cl-secondary: rgb(230, 0, 180);
+  --cl-secondary-02: rgba(230, 0, 180, 0.2);
+  --cl-secondary-06: rgba(230, 0, 180, 0.6);
+  --cl-secondary-08: rgba(230, 0, 180, 0.8);
+
+  --cl-accent-a: rgb(124, 58, 237);
+  --cl-accent-a-02: rgba(124, 58, 237, 0.2);
+
+  --cl-accent-b: rgb(57, 255, 20);
+  --cl-accent-b-02: rgba(57, 255, 20, 0.2);
+
+  --cl-light: rgb(255, 255, 255);
+  --cl-light-02: rgba(255, 255, 255, 0.2);
+  --cl-light-06: rgba(255, 255, 255, 0.6);
+  --cl-light-08: rgba(255, 255, 255, 0.8);
+
+  --cl-dark: rgb(0, 0, 0);
+  --cl-dark-02: rgba(0, 0, 0, 0.2);
+  --cl-dark-04: rgba(0, 0, 0, 0.4);
+
+  // SIZE
+  --sz-2: 0.125rem;
+  --sz-4: 0.25rem;
+  --sz-6: 0.375rem;
+  --sz-8: 0.5rem;
+  --sz-10: 0.625rem;
+  --sz-14: 0.875rem;
+  --sz-16: 1rem;
+  --sz-18: 1.125rem;
+  --sz-20: 1.25rem;
+  --sz-22: 1.375rem;
+  --sz-26: 1.625rem;
+  --sz-30: 1.875rem;
+  --sz-40: 2.5rem;
+  --sz-50: 3.125rem;
+  --sz-60: 3.75rem;
+  --sz-70: 4.375rem;
+  --sz-80: 5rem;
+  --sz-100: 6.25rem;
+  --sz-120: 7.5rem;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: "Georgia", serif;
-  background: linear-gradient(to bottom, #1a1333, #100c1a);
-  color: #fff;
-  line-height: 1.5;
-  min-height: 100vh;
-  padding: 2rem;
+  font-family: "JetBrains Mono", "Fira Code", monospace;
+  background: var(--cl-dark);
+  color: var(--cl-light-06);
+  line-height: 1.6;
+  overflow-x: hidden;
+  margin: 0;
+  scroll-behavior: smooth;
 }
 
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  &-track {
+    background: var(--cl-dark);
+  }
+  &-thumb {
+    background: linear-gradient(var(--cl-primary), var(--cl-secondary));
+    border-radius: 4px;
+    &:hover {
+      background: linear-gradient(var(--cl-secondary), var(--cl-primary));
+    }
+  }
+}

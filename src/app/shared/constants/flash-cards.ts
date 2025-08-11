@@ -18,6 +18,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - treated like variables, only name is hoisted
     - calling them early results in TypeError
     `,
+    category: 'JavaScript',
   },
   {
     question: 'What is clousure in JavaScript and how can it be useful?',
@@ -27,6 +28,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - that is caused by JS functions forming a lexical closure (capture and retain access to their surrounding scope at the time of definition)
     - in Angular we use that for creating private variables in services, building factory functions, managing callback state
     `,
+    category: 'JavaScript',
   },
   {
     question: 'How can you manage/propagate state in Angular?',
@@ -47,6 +49,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - useful for preserving context between views
     - Angular router can carry state via route parameters, query params or Navigation Extras
     `,
+    category: 'Angular',
   },
   {
     question: 'What design patterns are used in Angular?',
@@ -66,6 +69,7 @@ export const FLASH_CARDS: FlashCard[] = [
     7. Template Pattern
     HTML templates define UI structure, with dynamic binding logic behind the scenes.
     `,
+    category: 'Angular',
   },
   {
     question: 'What is a difference between span and div in HTML?',
@@ -78,6 +82,7 @@ export const FLASH_CARDS: FlashCard[] = [
     Used to style or group inline text, without breaking the flow.
     Default - display: inline, inline-level, for styling inline text
     `,
+    category: 'HTML/CSS',
   },
   {
     question: 'What does the RxJS switchMap do?',
@@ -87,6 +92,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - you want only the latest request to be active
     - you want to cancel previous async operations if a new one starts
     `,
+    category: 'Angular',
   },
   {
     question: 'What is the difference between composition and inheritance?',
@@ -97,6 +103,7 @@ export const FLASH_CARDS: FlashCard[] = [
     Inheritance - one class extends another, reusing and overriding its behavior.
     Is-a relationship - AdminUser extends User
     `,
+    category: 'General',
   },
   {
     question: 'How to center a div conent?',
@@ -117,6 +124,7 @@ export const FLASH_CARDS: FlashCard[] = [
     left: 50%;
     transform: translate(-50%, -50%);
     `,
+    category: 'HTML/CSS',
   },
   {
     question: 'What are TypeScript generics?',
@@ -128,6 +136,7 @@ export const FLASH_CARDS: FlashCard[] = [
       return collectionData(collection(this.firestore, name)) as Observable<T[]>;
     }
     `,
+    category: 'TypeScript',
   },
   {
     question: 'What we get from using SCSS?',
@@ -148,6 +157,7 @@ export const FLASH_CARDS: FlashCard[] = [
     %base-button {..styles}
     .btn-primary { @extend %base-button }
     `,
+    category: 'HTML/CSS',
   },
   {
     question:
@@ -157,6 +167,7 @@ export const FLASH_CARDS: FlashCard[] = [
     It is a service that sits between your app and the backend. It allows you to globally inspect, modify, or handle all HTTP requests and responses.
     Examples: Adding auth tokens to requests, logging, global error handling, showing/hiding loading spinners, retrying failed requests. 
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -170,6 +181,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     Use guards to enforce rules before navigation happens. Perfect for auth, roles, or custom logic like feature flags.
     `,
+    category: 'Angular',
   },
   {
     question: 'What are the ways to optimize Angular applications?',
@@ -204,6 +216,7 @@ export const FLASH_CARDS: FlashCard[] = [
     Optimize Images & Assets
     Use WebP, SVGs, responsive images. Compress icons/assets and serve them via CDN.
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -213,6 +226,7 @@ export const FLASH_CARDS: FlashCard[] = [
     
     This improves performance by skipping unnecessary re-rendering of compnonents whose inputs or reactive dependencies haven't changed.
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -225,6 +239,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     If the method returns an Observable, I'd mock it to return a of(mockData) stream and use the async pipe or fakeAsync + tick() in the test to flush the observable.
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -236,6 +251,7 @@ export const FLASH_CARDS: FlashCard[] = [
     
     concatMap - queues inner observables and runs them one after another in order. Use when order matters (e.g. submitting form steps or commands sequentially).
     `,
+    category: 'Angular',
   },
   {
     question: 'What is SOLID and how it applies to Angular development?',
@@ -255,6 +271,7 @@ export const FLASH_CARDS: FlashCard[] = [
     D - Dependency Inversion Principle (DIP)
     High-level modules shouldn't depend on low-level modules - both should depend on abstractions. In Angular, we avoid directly using 3rd-party services inside components. Instead, we create facade services that depend on interfaces, and inject implementations. This keeps the app testable and swappable.
     `,
+    category: 'General',
   },
   {
     question:
@@ -273,6 +290,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     The Event Loop keeps the JS engine resposive by coordinating when and how async callbacks are executed. It ensures microtasks (like Promises) run before macrotasks (like setTimeout).
     `,
+    category: 'JavaScript',
   },
   {
     question: 'What are Angular decorators, and how do they work?',
@@ -287,6 +305,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     A practical example - use @HostListener('document:click') to close a dropdown when clicking outside of it (instead of manually wiring up DOM listeners).
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -300,6 +319,7 @@ export const FLASH_CARDS: FlashCard[] = [
     2. Fine Grained reactivity - only parts of DOM that depend on signals are re-rendered.
     3. Easier to reason about (especially with computed and effect).
     `,
+    category: 'Angular',
   },
   {
     question: 'What is SignalStore in Angular?',
@@ -323,6 +343,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     SignalStore gives you the power of reactive state management with almost no setup. It is also perfect for when the NgRx would be overkill.
     `,
+    category: 'Angular',
   },
   {
     question: 'What is Angular lifecycle and what are lifecycle hooks?',
@@ -350,6 +371,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - ngAfterViewInit (when you need accesss to @ViewChild() elements)
     - ngOnDestroy (to clean up subscriptions or interval timers)
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -360,6 +382,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     Rule of thumb would be to start with a well-structured monolith and extract microservices only when scaling, ownership, or performance demand it.
     `,
+    category: 'General',
   },
   {
     question: 'Angular forms - what are the options?',
@@ -373,6 +396,7 @@ export const FLASH_CARDS: FlashCard[] = [
     Signal-Based Forms (Angular 20+)
     They are based on Signals, uses builder-based API (createFormGroup, FormControl). They feel more reactive and declarative, they are fully integrated with Signals ecostystem and fine-grained reactivity.
     `,
+    category: 'Angular',
   },
   {
     question: 'What is Domain Driven Design?',
@@ -381,6 +405,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     It helps to keep the code aligned with the real business, design modular and maintainable system, avoids models with just data and without behavior and makes refactoring and scaling easier as your domain grows.
     `,
+    category: 'General',
   },
   {
     question:
@@ -397,6 +422,7 @@ export const FLASH_CARDS: FlashCard[] = [
     4. Write meaningful tests and test names.
     5. Mock external dependencies.
     `,
+    category: 'Angular',
   },
   {
     question: 'Data Structures - what they are and what for?',
@@ -411,6 +437,7 @@ export const FLASH_CARDS: FlashCard[] = [
     6. Tree - hierarchical structure (e.g. DOM is a tree). Used in sorting, searching (BST), representing structure.
     7. Graph - Set of nodes and edges, used for modeling complex relationships (e.g. routing, social networks).
     `,
+    category: 'General',
   },
   {
     question: 'What is DOM?',
@@ -424,6 +451,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     In Angular we rarly manipulate the DOM directly, instead we use Angular own abstarction (Renderer, ViewRef, etc.) and handle DOM updates efficiently through change detection.
     `,
+    category: 'General',
   },
   {
     question: 'What are Promises, Observables and Subjects?',
@@ -449,6 +477,8 @@ export const FLASH_CARDS: FlashCard[] = [
     - ReplaySubject (replays past values to new subscribers)
     - AsyncSubject (only emits the last value on completion)
     `,
+
+    category: 'Angular',
   },
   {
     question:
@@ -474,6 +504,7 @@ export const FLASH_CARDS: FlashCard[] = [
     1. Resolver - ActivatedRoute (e.g. route.data['user'])
     2. Interceptor - transparent, affects all HTTP calls
     `,
+    category: 'Angular',
   },
   {
     question: 'WEB Workers and Service Workers in Javascript?',
@@ -490,6 +521,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - they require HTTPS (except on localhost)
     They have lifecycle of register > install > activate > fetch (events).
     `,
+    category: 'JavaScript',
   },
   {
     question:
@@ -498,6 +530,8 @@ export const FLASH_CARDS: FlashCard[] = [
     Angular will create a new instance of the service scoped to the component. It will not reuse the global singleton from the root injector.
     Furthermore, this new instance will be destroyed when the component is destroyed, unless other components in the same injector tree are still using it.
     `,
+
+    category: 'Angular',
   },
   {
     question: 'What are Promises, how can you cancel a Promise in JavaScript?',
@@ -512,6 +546,8 @@ export const FLASH_CARDS: FlashCard[] = [
     - Custom Cancelable Promise Wrapper
     It doesn't stop underlying task, just prevents .then() from resolving
     `,
+
+    category: 'JavaScript',
   },
   {
     question: 'What is async/await in JavaScript?',
@@ -521,6 +557,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - can only be used inside async function
     - handles error with try catch block
     `,
+    category: 'JavaScript',
   },
   {
     question: 'What is Overloading in JavaScript and Angular?',
@@ -535,6 +572,7 @@ export const FLASH_CARDS: FlashCard[] = [
     TypeScript (Angular also)
     Supports overloading, you can define multiple signatures.
     `,
+    category: 'JavaScript',
   },
   {
     question: 'What is @defer in Angular?',
@@ -546,6 +584,7 @@ export const FLASH_CARDS: FlashCard[] = [
     Or you can go with basic syntax:
     - @defer{}@placeholder{}@error{}@loading{}
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -562,6 +601,7 @@ export const FLASH_CARDS: FlashCard[] = [
     <h1 title>This is the title</h1>
     <p body>This is the body</p>
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -585,6 +625,7 @@ export const FLASH_CARDS: FlashCard[] = [
 
     <ng-container *ngTemplateOutlet="loading"></ng-container>
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -604,6 +645,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - emissions will still arrive, even after the component is destroyed
     - this can cause leaks or trying to update destroyed views
     `,
+    category: 'Angular',
   },
   {
     question: 'What are common RxJS operators and what they do?',
@@ -643,6 +685,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - finalize(fn) - runs when observable completes or errors
     - delay(ms) - delays each emission
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -661,6 +704,8 @@ export const FLASH_CARDS: FlashCard[] = [
     1. Socket.IO - JS library that simplifies WebSocket usage and adds fallbacks (like long polling).
     2. Firebase Realtime Database - Real time backend-as-a-service.
     `,
+
+    category: 'General',
   },
   {
     question:
@@ -685,6 +730,8 @@ export const FLASH_CARDS: FlashCard[] = [
     - optionally use a manual search button for very slow APIs
     *** For big apps: cache results, use paginated responses, throttle scrolls
     `,
+
+    category: 'Angular',
   },
   {
     question:
@@ -696,6 +743,7 @@ export const FLASH_CARDS: FlashCard[] = [
     RxJS-based:
     Use exhaustMap() to ensure only the first click is handled until that requests completes - all other clicks are ignored during that time.
     `,
+    category: 'Angular',
   },
   {
     question:
@@ -721,6 +769,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - visual feedback like loading spinners or disabling buttons
     - consider auto-save logic with explicity Save button
     `,
+    category: 'Angular',
   },
   {
     question: 'What are WEB Components? How they work?',
@@ -748,6 +797,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - reusable & portable (build once, use anywhere)
     - native to browser (no runtime or extra libraries required)
     `,
+    category: 'General',
   },
   {
     question: 'What are Angular PWA?',
@@ -766,6 +816,7 @@ export const FLASH_CARDS: FlashCard[] = [
     5. Save
     Must be served over HTTPS for security.
     `,
+    category: 'Angular',
   },
   {
     question: 'What are core JS Collections?',
@@ -788,6 +839,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - Like Set but only for objects
     - non-enumerable, weakly held
     `,
+    category: 'JavaScript',
   },
   {
     question: 'How to optimize frontend on low-level?',
@@ -810,6 +862,7 @@ export const FLASH_CARDS: FlashCard[] = [
     - loading="lazy" for images
     - Route-based code splitting in Angular
     `,
+    category: 'General',
   },
   {
     question: 'What is multi-threading in JS?',
@@ -826,15 +879,73 @@ export const FLASH_CARDS: FlashCard[] = [
     - true shared memory and synchronization between threads
     - advanced use case like rendering, image processing
     `,
+    category: 'JavaScript',
   },
   {
-    question: 'Ways of connecting JS to HTML?',
-    answer: ``,
+    question:
+      'What are Resolvers in Angular? User sees blank screen or loading every single time when we fetch data in ngOnInit().',
+    answer: `
+    Resolvers let Angular wait for the data first, then load the page with everything ready.
+    Instead of:
+    1. Load component -> 2. Fetch data -> 3. Update UI
+    You get:
+    1. Fetch data -> 2. Load component (with data ready)
+
+    How to create flow?
+    1. Create a service
+    export class UserService {
+      getUser(id: string) {
+        // In real apps, this would call a server/API
+        return of({ id, name: 'Tony', age: 30 }); // returns Observable
+      }
+    }
+
+    2. Create a resolver function
+    export const userResolver: ResolveFn<any> = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+      const userService = inject(UserService);
+      const userId = route.paramMap.get('id')!;
+      return userService.getUser(userId); // returns the user info
+    };
+
+    3. Use the resolver in the route (app.routes)
+    export const routes: Routes = [
+      {
+        path: 'profile/:id',
+        component: ProfileComponent,
+        resolve: {
+          user: userResolver
+        }
+      }
+    ];
+
+    4. Access the data in the component (Refactored using Signals)
+    After the resolver fetches the user info, the component can access it using Signals for a cleaner, reactive setup.
+
+    export class ProfileComponent {
+      private route = inject(ActivatedRoute);
+      private data = toSignal(this.route.data); // convert resolver data to a signal
+
+      user = computed(() => this.data().user); // create a reactive user signal
+    }
+
+
+    Why to use resolvers?
+    1. Prevent empty UI
+    2. Avoid complex loading spinners
+    3. Handle errors early
+    4. Improved UX
+    `,
+    category: 'Angular',
   },
-  {
-    question: 'What to use id or class selectors in HTML/CSS?',
-    answer: ``,
-  },
+  // {
+  //   question: 'Ways of connecting JS to HTML?',
+  //   answer: ``,
+  //   category: 'JavaScript'
+  // },
+  // {
+  //   question: 'What to use id or class selectors in HTML/CSS?',
+  //   answer: ``,
+  // },
   // {
   //   question: '',
   //   answer: ``,

@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
   selector: 'app-navbar-logo',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: ` <a class="logo" href="/" aria-label="Go to homepage">Grimoire</a> `,
+  template: ` <a class="logo" href="/" aria-label="Go to homepage"></a> `,
   styles: [
     `
       .logo {
@@ -17,17 +17,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         transition: all 0.3s ease;
 
         &:hover {
-          text-shadow: 0 0 30px var(--cl-primary);
-
           &::before {
-            margin-right: var(--sz-6);
-            text-shadow: 0 0 30px var(--cl-accent-b);
+            text-shadow: 0 0 30px var(--cl-primary);
           }
         }
-
         &::before {
           content: '🔮';
-          color: var(--cl-accent-b);
         }
       }
     `,

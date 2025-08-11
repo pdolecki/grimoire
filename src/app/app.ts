@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Background } from './shell/background/background';
-import { Navbar } from './shell/navbar/navbar';
+import { Background } from './shared/ui/background/background';
+import { Navbar } from './shared/ui/navbar/navbar';
 
 @Component({
   selector: 'app-root',

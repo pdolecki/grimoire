@@ -4,7 +4,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CardModel } from '../../interfaces/card-model';
+import { CardModel } from '../shared/interfaces/card-model';
 
 @Component({
   selector: 'app-card',

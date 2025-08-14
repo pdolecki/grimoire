@@ -51,7 +51,7 @@ const BREAKPOINT = 920; // keep in sync with CSS @media
         position: fixed;
         top: 0;
         width: 100%;
-        height: 85px;
+        height: var(--nav-height);
         padding: 1rem 2rem;
         background: var(--cl-dark-04);
         backdrop-filter: blur(20px);

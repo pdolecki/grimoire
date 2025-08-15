@@ -29,11 +29,11 @@ type NavLink = { label: string; href: string };
       .menu {
         z-index: 9999;
         position: fixed;
-        top: 85px;
+        top: var(--nav-height);
         right: 0;
         width: 80%;
         max-width: 350px;
-        height: calc(100dvh - 85px);
+        height: calc(100dvh - var(--nav-height));
         background: var(--cl-dark-04);
         backdrop-filter: blur(20px);
         border-left: 1px solid var(--cl-light-02);

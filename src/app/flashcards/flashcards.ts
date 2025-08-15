@@ -10,8 +10,8 @@ import {
 import { Router } from '@angular/router';
 import { SectionHeader } from '../shared/ui/section-header';
 import { CATEGORIES } from '../shared/constants/categories';
-import { Card } from './card';
-import { Toolbar } from './toolbar';
+import { Card } from './ui/card';
+import { Toolbar } from './ui/toolbar';
 
 @Component({
   selector: 'app-flashcards',
@@ -55,6 +55,9 @@ import { Toolbar } from './toolbar';
         max-width: 1400px;
         padding: var(--sz-120) var(--sz-30);
         position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: var(--sz-30);
       }
 
       .flashcards-grid {
@@ -71,6 +74,7 @@ import { Toolbar } from './toolbar';
       @media (max-width: 768px) {
         .flashcards-grid {
           grid-template-columns: 1fr;
+          gap: var(--sz-30);
         }
       }
     `,

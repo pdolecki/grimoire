@@ -4,7 +4,7 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CardModel } from '../shared/interfaces/card-model';
+import { CardModel } from '../../shared/interfaces/card-model';
 
 @Component({
   selector: 'app-card',
@@ -48,7 +48,6 @@ import { CardModel } from '../shared/interfaces/card-model';
         backdrop-filter: blur(10px);
         box-shadow: 0 20px 50px var(--cl-primary-02);
         position: relative;
-        outline: none;
         will-change: transform, filter;
         transition: transform 120ms ease, box-shadow 120ms ease,
           border-color 120ms ease;

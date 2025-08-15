@@ -16,7 +16,6 @@ import { Button } from '../../shared/ui/button';
       <div class="cta">
         <app-button
           label="Study Flashcards"
-          variant="primary"
           aria-label="Go to Flashcards"
           [href]="'flashcards'"
         />

@@ -1,17 +1,8 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  ViewChild,
-  computed,
-  inject,
-  signal,
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SectionHeader } from '../shared/ui/section-header';
-import { CATEGORIES } from '../shared/constants/categories';
 import { Card } from './ui/card';
 import { Toolbar } from './ui/toolbar';
+import { FlashcardsStore } from './data-access/flashcards-store';
 
 @Component({
   selector: 'app-flashcards',
@@ -19,26 +10,25 @@ import { Toolbar } from './ui/toolbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SectionHeader, Card, Toolbar],
   template: `
-    <section class="flashcards" aria-labelledby="flashcards-heading">
+    <section class="flashcards">
       <app-section-header
-        id="flashcards-heading"
         title="Modules"
         subtitle="Choose the flashcard modules you’re interested in studying or continue the last session."
       ></app-section-header>
 
       <app-toolbar
-        [selectedCount]="selectedCount()"
+        [selectedCount]="flashcardsStore.selectedCategories().size"
         (startLearning)="startLearning()"
-        (selectAll)="selectAll()"
-        (clear)="clear()"
+        (selectAll)="flashcardsStore.selectAllCategories()"
+        (clear)="flashcardsStore.clearSelectedCategories()"
       ></app-toolbar>
 
-      <div class="flashcards-grid" role="list">
-        @for (category of categories; track category.id) {
+      <div class="flashcards-grid">
+        @for (category of flashcardsStore.CATEGORIES; track category.id) {
         <app-card
           [cardData]="category"
-          [selected]="isSelected(category.id)"
-          (toggled)="toggle(category.id)"
+          [selected]="flashcardsStore.isCategorySelected(category.id)"
+          (toggled)="flashcardsStore.toggleCategorySelection(category.id)"
         ></app-card>
         }
       </div>
@@ -46,10 +36,6 @@ import { Toolbar } from './ui/toolbar';
   `,
   styles: [
     `
-      :host {
-        display: block;
-      }
-
       .flashcards {
         margin: 0 auto;
         max-width: 1400px;
@@ -81,37 +67,9 @@ import { Toolbar } from './ui/toolbar';
   ],
 })
 export default class Flashcards {
-  private readonly router = inject(Router);
-
-  protected readonly categories = CATEGORIES;
-
-  private readonly selected = signal<Set<string>>(new Set());
-  protected readonly selectedCount = computed(() => this.selected().size);
-  protected isSelected = (id: string) => this.selected().has(id);
-
-  @ViewChild('toolbar', { static: true }) toolbarRef!: ElementRef<HTMLElement>;
-  private readonly toolbarInView = signal(true);
-
-  protected toggle(id: string) {
-    this.selected.update((set) => {
-      const next = new Set(set);
-      next.has(id) ? next.delete(id) : next.add(id);
-      return next;
-    });
-  }
-
-  protected selectAll() {
-    this.selected.set(new Set(this.categories.map((c) => c.id)));
-  }
-
-  protected clear() {
-    this.selected.set(new Set());
-  }
+  readonly flashcardsStore = inject(FlashcardsStore);
 
   protected startLearning() {
-    const ids = Array.from(this.selected());
-    this.router.navigate(['/learn'], {
-      queryParams: { categories: ids.join(',') },
-    });
+    // const ids = Array.from(this.selected());
   }
 }

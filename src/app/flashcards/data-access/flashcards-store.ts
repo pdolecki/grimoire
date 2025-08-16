@@ -1,0 +1,32 @@
+import { Injectable, signal } from '@angular/core';
+import { FLASHCARDS } from '../constants/flashcards';
+import { CATEGORIES } from '../constants/categories';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class FlashcardsStore {
+  readonly FLASHCARDS = FLASHCARDS;
+  readonly CATEGORIES = CATEGORIES;
+
+  readonly selectedCategories = signal<Set<string>>(new Set());
+
+  readonly isCategorySelected = (id: string) =>
+    this.selectedCategories().has(id);
+
+  toggleCategorySelection(id: string) {
+    this.selectedCategories.update((set) => {
+      const next = new Set(set);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
+
+  selectAllCategories() {
+    this.selectedCategories.set(new Set(this.CATEGORIES.map((c) => c.id)));
+  }
+
+  clearSelectedCategories() {
+    this.selectedCategories.set(new Set());
+  }
+}

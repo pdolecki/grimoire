@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { SectionHeader } from '../shared/ui/section-header';
 import { Card } from './ui/card';
 import { Toolbar } from './ui/toolbar';
@@ -39,7 +38,6 @@ import { FlashcardsStore } from './data-access/flashcards-store';
     `
       .flashcards {
         margin: var(--nav-heigh) auto;
-        max-width: 1400px;
         padding: var(--sz-120) var(--sz-30);
         position: relative;
         display: flex;
@@ -68,7 +66,6 @@ import { FlashcardsStore } from './data-access/flashcards-store';
   ],
 })
 export default class Flashcards {
-  private readonly router = inject(Router);
   readonly flashcardsStore = inject(FlashcardsStore);
 
   protected startLearning() {}

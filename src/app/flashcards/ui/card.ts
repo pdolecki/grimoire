@@ -22,7 +22,7 @@ import { CardModel } from '../interfaces/card-model';
       role="listitem"
     >
       <div class="icon" aria-hidden="true">{{ cardData().icon }}</div>
-      <h3 class="title">{{ cardData().title }}</h3>
+      <h3 class="title">{{ cardData().category }}</h3>
       <p class="caption">
         {{ cardData().caption }}
       </p>

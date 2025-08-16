@@ -2,13 +2,6 @@ import { CardModel } from '../interfaces/card-model';
 
 export const CATEGORIES: CardModel[] = [
   {
-    id: 'all',
-    icon: '📚',
-    title: 'All Categories',
-    caption:
-      'Explore the complete set of flashcards without limiting results to any specific topic or area.',
-  },
-  {
     id: 'javascript',
     icon: '📜',
     title: 'JavaScript',

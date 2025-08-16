@@ -1,6 +1,6 @@
-import { FlashCard } from '../interfaces/flash-card';
+import { Flashcard } from '../interfaces/flash-card';
 
-export const FLASHCARDS: FlashCard[] = [
+export const FLASHCARDS: Flashcard[] = [
   {
     question: 'What is hoisting in JavaScript?',
     answer: `

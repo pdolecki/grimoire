@@ -1,6 +1,5 @@
 export interface CardModel {
-  id: string;
   icon: string;
-  title: string;
+  category: string;
   caption: string;
 }

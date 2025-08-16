@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { FLASHCARDS } from '../constants/flashcards';
 import { CATEGORIES } from '../constants/categories';
 
@@ -10,6 +10,9 @@ export class FlashcardsStore {
   readonly CATEGORIES = CATEGORIES;
 
   readonly selectedCategories = signal<Set<string>>(new Set());
+  readonly selectedFlashcards = computed(() =>
+    this.FLASHCARDS.filter((fc) => this.selectedCategories().has(fc.category))
+  );
 
   readonly isCategorySelected = (id: string) =>
     this.selectedCategories().has(id);
@@ -23,7 +26,9 @@ export class FlashcardsStore {
   }
 
   selectAllCategories() {
-    this.selectedCategories.set(new Set(this.CATEGORIES.map((c) => c.id)));
+    this.selectedCategories.set(
+      new Set(this.CATEGORIES.map((c) => c.category))
+    );
   }
 
   clearSelectedCategories() {

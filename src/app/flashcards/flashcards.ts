@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 import { SectionHeader } from '../shared/ui/section-header';
 import { Card } from './ui/card';
 import { Toolbar } from './ui/toolbar';
@@ -14,22 +15,22 @@ import { FlashcardsStore } from './data-access/flashcards-store';
       <app-section-header
         title="Modules"
         subtitle="Choose the flashcard modules you’re interested in studying or continue the last session."
-      ></app-section-header>
+      />
 
       <app-toolbar
         [selectedCount]="flashcardsStore.selectedCategories().size"
         (startLearning)="startLearning()"
         (selectAll)="flashcardsStore.selectAllCategories()"
         (clear)="flashcardsStore.clearSelectedCategories()"
-      ></app-toolbar>
+      />
 
       <div class="flashcards-grid">
-        @for (category of flashcardsStore.CATEGORIES; track category.id) {
+        @for (category of flashcardsStore.CATEGORIES; track category.category) {
         <app-card
           [cardData]="category"
-          [selected]="flashcardsStore.isCategorySelected(category.id)"
-          (toggled)="flashcardsStore.toggleCategorySelection(category.id)"
-        ></app-card>
+          [selected]="flashcardsStore.isCategorySelected(category.category)"
+          (toggled)="flashcardsStore.toggleCategorySelection(category.category)"
+        />
         }
       </div>
     </section>
@@ -37,7 +38,7 @@ import { FlashcardsStore } from './data-access/flashcards-store';
   styles: [
     `
       .flashcards {
-        margin: 0 auto;
+        margin: var(--nav-heigh) auto;
         max-width: 1400px;
         padding: var(--sz-120) var(--sz-30);
         position: relative;
@@ -67,9 +68,8 @@ import { FlashcardsStore } from './data-access/flashcards-store';
   ],
 })
 export default class Flashcards {
+  private readonly router = inject(Router);
   readonly flashcardsStore = inject(FlashcardsStore);
 
-  protected startLearning() {
-    // const ids = Array.from(this.selected());
-  }
+  protected startLearning() {}
 }

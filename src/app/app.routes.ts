@@ -7,7 +7,16 @@ export const routes: Routes = [
   },
   {
     path: 'flashcards',
-    loadComponent: () => import('./flashcards/flashcards'),
+    children: [
+      {
+        path: '',
+        loadComponent: () => import('./flashcards/flashcards'),
+      },
+      {
+        path: 'learn',
+        loadComponent: () => import('./flashcards/ui/learn'),
+      },
+    ],
   },
   {
     path: '**',

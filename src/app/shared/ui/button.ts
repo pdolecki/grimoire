@@ -42,7 +42,6 @@ import {
         display: inline-block;
         text-align: center;
         text-decoration: none;
-
         background: transparent;
         color: var(--cl-primary);
         border: 2px solid var(--cl-primary);
@@ -51,13 +50,11 @@ import {
           background: var(--cl-primary);
           color: var(--cl-dark);
         }
-
         &.small {
           text-transform: none;
           font-size: var(--sz-16);
           padding: var(--sz-8) var(--sz-14);
         }
-
         &.primary {
           border: none;
           color: var(--cl-dark);
@@ -72,12 +69,10 @@ import {
           }
         }
       }
-
       :disabled {
         opacity: 0.6;
         cursor: not-allowed;
       }
-
       @media (max-width: 768px) {
         .button {
           width: 100%;

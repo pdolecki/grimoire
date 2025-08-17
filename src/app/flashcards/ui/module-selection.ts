@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SectionHeader } from '../../shared/ui/section-header';
 import { Toolbar } from './toolbar';
-import { Card } from './card';
 import { FlashcardsStore } from '../data-access/flashcards-store';
+import { Card } from '../../shared/ui/card';
 
 @Component({
   selector: 'app-module-selection',
@@ -23,11 +23,11 @@ import { FlashcardsStore } from '../data-access/flashcards-store';
       />
 
       <div class="flashcards-grid">
-        @for (category of flashcardsStore.CATEGORIES; track category.category) {
+        @for (category of flashcardsStore.CATEGORIES; track category.title) {
         <app-card
           [cardData]="category"
-          [selected]="flashcardsStore.isCategorySelected(category.category)"
-          (toggled)="flashcardsStore.toggleCategorySelection(category.category)"
+          [selected]="flashcardsStore.isCategorySelected(category.title)"
+          (toggled)="flashcardsStore.toggleCategorySelection(category.title)"
         />
         }
       </div>

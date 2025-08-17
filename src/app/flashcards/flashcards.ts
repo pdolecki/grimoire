@@ -14,7 +14,6 @@ import { ModuleSelection } from './ui/module-selection';
       <app-module-selection></app-module-selection>
       } @else {
       <app-learn
-        [flashcards]="flashcardsStore.selectedFlashcards()"
       ></app-learn>
       }
     </section>

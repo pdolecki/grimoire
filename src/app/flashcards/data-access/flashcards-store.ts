@@ -29,7 +29,7 @@ export class FlashcardsStore {
 
   selectAllCategories() {
     this.selectedCategories.set(
-      new Set(this.CATEGORIES.map((c) => c.category))
+      new Set(this.CATEGORIES.map((c) => c.title))
     );
   }
 

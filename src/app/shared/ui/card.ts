@@ -13,9 +13,9 @@ import { CardData } from '../interfaces/card-data';
     <article class="card" [class.selected]="selected()" (click)="onToggle()">
       @if(selected()) {
       <div class="card__checkmark">✔</div>
-      }
-
+      } @if (cardData().icon) {
       <div class="card__icon">{{ cardData().icon }}</div>
+      }
       <h3 class="card__title">{{ cardData().title }}</h3>
       <p class="card__caption">
         {{ cardData().caption }}

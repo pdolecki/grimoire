@@ -1,6 +1,6 @@
-import { Flashcard } from '../interfaces/flashcard';
+import { FlashcardData } from '../interfaces/flashcard-data';
 
-export const FLASHCARDS: Flashcard[] = [
+export const FLASHCARDS: FlashcardData[] = [
   {
     question: 'What is hoisting in JavaScript?',
     answer: `
@@ -82,7 +82,7 @@ export const FLASHCARDS: Flashcard[] = [
     Used to style or group inline text, without breaking the flow.
     Default - display: inline, inline-level, for styling inline text
     `,
-    category: 'HTMLCSS',
+    category: 'HTML/CSS',
   },
   {
     question: 'What does the RxJS switchMap do?',
@@ -124,7 +124,7 @@ export const FLASHCARDS: Flashcard[] = [
     left: 50%;
     transform: translate(-50%, -50%);
     `,
-    category: 'HTMLCSS',
+    category: 'HTML/CSS',
   },
   {
     question: 'What are TypeScript generics?',
@@ -157,7 +157,7 @@ export const FLASHCARDS: Flashcard[] = [
     %base-button {..styles}
     .btn-primary { @extend %base-button }
     `,
-    category: 'HTMLCSS',
+    category: 'HTML/CSS',
   },
   {
     question:
@@ -943,7 +943,7 @@ export const FLASHCARDS: Flashcard[] = [
   //   category: 'JavaScript'
   // },
   // {
-  //   question: 'What to use id or class selectors in HTMLCSS?',
+  //   question: 'What to use id or class selectors in HTML/CSS?',
   //   answer: ``,
   // },
   // {

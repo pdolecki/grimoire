@@ -1,5 +1,5 @@
 export interface CardData {
-  icon: string;
+  icon?: string;
   title: string;
   caption: string;
 }

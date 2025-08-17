@@ -21,7 +21,7 @@ export const CATEGORIES: CardData[] = [
   },
   {
     icon: '🎨',
-    title: 'HTMLCSS',
+    title: 'HTML/CSS',
     caption:
       'Semantic HTML, responsive layouts, and modern CSS techniques for clean, accessible, and maintainable user interfaces.',
   },
@@ -31,4 +31,4 @@ export const CATEGORIES: CardData[] = [
     caption:
       'Broad development knowledge, design principles, and essential programming skills across various technologies.',
   },
-] as const;
+];

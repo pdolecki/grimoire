@@ -7,11 +7,11 @@ import {
 import { Button } from '../../shared/ui/button';
 
 @Component({
-  selector: 'app-module-selection-toolbar',
+  selector: 'app-toolbar',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Button],
   template: `
-    <div class="module-selection-toolbar">
+    <div class="toolbar">
       <app-button
         label="Select all"
         size="small"
@@ -36,7 +36,7 @@ import { Button } from '../../shared/ui/button';
   `,
   styles: [
     `
-      .module-selection-toolbar {
+      .toolbar {
         z-index: 10;
         display: flex;
         align-items: center;
@@ -51,7 +51,7 @@ import { Button } from '../../shared/ui/button';
         }
       }
       @media (max-width: 768px) {
-        .module-selection-toolbar {
+        .toolbar {
           position: sticky;
           top: var(--nav-height);
           display: grid;
@@ -64,7 +64,7 @@ import { Button } from '../../shared/ui/button';
     `,
   ],
 })
-export class ModuleSelectionToolbar {
+export class Toolbar {
   readonly selectedCount = input.required<number>();
   readonly startLearning = output<void>();
   readonly selectAll = output<void>();

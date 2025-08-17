@@ -15,6 +15,8 @@ export class FlashcardsStore {
   );
 
   readonly learningStarted = signal<boolean>(false);
+  readonly revealed = signal(false);
+  readonly currentFlashcard = signal(this.getRandomFlashcard());
 
   readonly isCategorySelected = (id: string) =>
     this.selectedCategories().has(id);
@@ -28,12 +30,28 @@ export class FlashcardsStore {
   }
 
   selectAllCategories() {
-    this.selectedCategories.set(
-      new Set(this.CATEGORIES.map((c) => c.title))
-    );
+    this.selectedCategories.set(new Set(this.CATEGORIES.map((c) => c.title)));
   }
 
   clearSelectedCategories() {
     this.selectedCategories.set(new Set());
+  }
+
+  getRandomFlashcard() {
+    this.revealed.set(false);
+    const randomIndex = Math.floor(
+      Math.random() * this.selectedFlashcards().length
+    );
+    console.log(this.selectedFlashcards()[randomIndex]);
+    return this.selectedFlashcards()[randomIndex];
+  }
+
+  drawAnother() {
+    this.currentFlashcard.set(this.getRandomFlashcard());
+  }
+
+  startLearning() {
+    this.drawAnother();
+    this.learningStarted.set(true);
   }
 }

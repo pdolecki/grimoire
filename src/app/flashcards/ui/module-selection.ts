@@ -22,7 +22,7 @@ import { Card } from '../../shared/ui/card';
         (clear)="flashcardsStore.clearSelectedCategories()"
       />
 
-      <div class="flashcards-grid">
+      <div class="module-selection__grid">
         @for (category of flashcardsStore.CATEGORIES; track category.title) {
         <app-card
           [cardData]="category"
@@ -39,22 +39,26 @@ import { Card } from '../../shared/ui/card';
         display: flex;
         flex-direction: column;
         gap: var(--sz-30);
+        &__grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: var(--sz-50);
+          align-items: stretch;
+          & > app-card {
+            display: block;
+            height: 100%;
+          }
+        }
       }
-      .flashcards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: var(--sz-50);
-        align-items: stretch;
-      }
-      .flashcards-grid > app-card {
-        display: block;
-        height: 100%;
-      }
-
       @media (max-width: 768px) {
-        .flashcards-grid {
-          grid-template-columns: 1fr;
+        .module-selection {
+          display: flex;
+          flex-direction: column;
           gap: var(--sz-30);
+          &__grid {
+            grid-template-columns: 1fr;
+            gap: var(--sz-30);
+          }
         }
       }
     `,

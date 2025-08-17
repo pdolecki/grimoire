@@ -11,21 +11,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (!href()) {
-    <button
-      type="button"
-      [class]="buttonClasses()"
-      [disabled]="disabled()"
-      [attr.aria-label]="ariaLabel() || label()"
-    >
+    <button type="button" [class]="buttonClasses()" [disabled]="disabled()">
       {{ label() }}
     </button>
     } @else {
-    <a
-      [class]="buttonClasses()"
-      [href]="href()"
-      rel="noopener noreferrer"
-      [attr.aria-label]="ariaLabel() || label()"
-    >
+    <a [class]="buttonClasses()" [href]="href()" rel="noopener noreferrer">
       {{ label() }}
     </a>
     }
@@ -88,7 +78,6 @@ export class Button {
   readonly variant = input<'primary' | 'secondary'>('primary');
   readonly href = input<string | null>(null); // optional for anchor mode
   readonly disabled = input<boolean>(false);
-  readonly ariaLabel = input<string | null>(null);
 
   buttonClasses = computed(() => ({
     button: true,

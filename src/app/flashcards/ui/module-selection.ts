@@ -12,7 +12,7 @@ import { Card } from '../../shared/ui/card';
     <section class="module-selection">
       <app-section-header
         title="Modules"
-        subtitle="Choose the flashcard modules you’re interested in studying or continue the last session."
+        description="Choose the flashcard modules you’re interested in studying or continue the last session."
       />
 
       <app-toolbar

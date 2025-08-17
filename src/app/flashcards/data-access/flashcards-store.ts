@@ -14,6 +14,8 @@ export class FlashcardsStore {
     this.FLASHCARDS.filter((fc) => this.selectedCategories().has(fc.category))
   );
 
+  readonly learningStarted = signal<boolean>(false);
+
   readonly isCategorySelected = (id: string) =>
     this.selectedCategories().has(id);
 

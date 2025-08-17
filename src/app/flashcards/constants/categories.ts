@@ -21,7 +21,7 @@ export const CATEGORIES: CardModel[] = [
   },
   {
     icon: '🎨',
-    category: 'HTML/CSS',
+    category: 'HTMLCSS',
     caption:
       'Semantic HTML, responsive layouts, and modern CSS techniques for clean, accessible, and maintainable user interfaces.',
   },

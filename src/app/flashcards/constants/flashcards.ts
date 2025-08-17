@@ -82,7 +82,7 @@ export const FLASHCARDS: Flashcard[] = [
     Used to style or group inline text, without breaking the flow.
     Default - display: inline, inline-level, for styling inline text
     `,
-    category: 'HTML/CSS',
+    category: 'HTMLCSS',
   },
   {
     question: 'What does the RxJS switchMap do?',
@@ -124,7 +124,7 @@ export const FLASHCARDS: Flashcard[] = [
     left: 50%;
     transform: translate(-50%, -50%);
     `,
-    category: 'HTML/CSS',
+    category: 'HTMLCSS',
   },
   {
     question: 'What are TypeScript generics?',
@@ -157,7 +157,7 @@ export const FLASHCARDS: Flashcard[] = [
     %base-button {..styles}
     .btn-primary { @extend %base-button }
     `,
-    category: 'HTML/CSS',
+    category: 'HTMLCSS',
   },
   {
     question:
@@ -943,7 +943,7 @@ export const FLASHCARDS: Flashcard[] = [
   //   category: 'JavaScript'
   // },
   // {
-  //   question: 'What to use id or class selectors in HTML/CSS?',
+  //   question: 'What to use id or class selectors in HTMLCSS?',
   //   answer: ``,
   // },
   // {

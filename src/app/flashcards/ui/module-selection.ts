@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { SectionHeader } from '../../shared/ui/section-header';
-import { Toolbar } from './toolbar';
+import { ModuleSelectionToolbar } from './module-selection-toolbar';
 import { FlashcardsStore } from '../data-access/flashcards-store';
 import { Card } from '../../shared/ui/card';
 
 @Component({
   selector: 'app-module-selection',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SectionHeader, Toolbar, Card],
+  imports: [SectionHeader, ModuleSelectionToolbar, Card],
   template: `
     <section class="module-selection">
       <app-section-header
@@ -15,7 +15,7 @@ import { Card } from '../../shared/ui/card';
         description="Choose the flashcard modules you’re interested in studying or continue the last session."
       />
 
-      <app-toolbar
+      <app-module-selection-toolbar
         [selectedCount]="flashcardsStore.selectedCategories().size"
         (startLearning)="flashcardsStore.learningStarted.set(true)"
         (selectAll)="flashcardsStore.selectAllCategories()"

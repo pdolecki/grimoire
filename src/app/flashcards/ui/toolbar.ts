@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   input,
   output,
 } from '@angular/core';
 import { Button } from '../../shared/ui/button';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,9 +15,9 @@ import { Button } from '../../shared/ui/button';
   template: `
     <div class="toolbar">
       <app-button
-        label="Select all"
         size="small"
         variant="secondary"
+        [label]="isNarrow ? 'All' : 'Select all'"
         (click)="selectAll.emit()"
       ></app-button>
       <app-button
@@ -28,8 +30,8 @@ import { Button } from '../../shared/ui/button';
         {{ selectedCount() }} selected
       </span>
       <app-button
-        label="Start Learning"
         size="small"
+        [label]="isNarrow ? 'Start' : 'Start Learning'"
         (click)="startLearning.emit()"
       ></app-button>
     </div>
@@ -69,4 +71,8 @@ export class Toolbar {
   readonly startLearning = output<void>();
   readonly selectAll = output<void>();
   readonly clear = output<void>();
+
+  private readonly breakpointObserver = inject(BreakpointObserver);
+  protected readonly isNarrow =
+    this.breakpointObserver.isMatched('(max-width: 768px)');
 }

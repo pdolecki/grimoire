@@ -5,6 +5,7 @@ import { Toolbar } from './ui/toolbar';
 import { Card } from '../shared/ui/card';
 import { Button } from '../shared/ui/button';
 import { Flashcard } from './ui/flashcard';
+import { CATEGORIES } from './constants/categories';
 
 @Component({
   selector: 'app-flashcards',
@@ -26,7 +27,7 @@ import { Flashcard } from './ui/flashcard';
           (clear)="flashcardsStore.clearSelectedCategories()"
         />
         <div class="grid">
-          @for (category of flashcardsStore.CATEGORIES; track category.title) {
+          @for (category of CATEGORIES; track category.title) {
           <app-card
             [cardData]="category"
             [selected]="flashcardsStore.isCategorySelected(category.title)"
@@ -83,5 +84,7 @@ import { Flashcard } from './ui/flashcard';
   ],
 })
 export default class Flashcards {
+  readonly CATEGORIES = CATEGORIES;
+
   protected readonly flashcardsStore = inject(FlashcardsStore);
 }

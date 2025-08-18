@@ -4,12 +4,13 @@ import { SectionHeader } from '../shared/ui/section-header';
 import { Toolbar } from './ui/toolbar';
 import { Card } from '../shared/ui/card';
 import { Button } from '../shared/ui/button';
+import { Flashcard } from './ui/flashcard';
 
 @Component({
   selector: 'app-flashcards',
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [SectionHeader, Card, Toolbar, Button],
+  imports: [SectionHeader, Card, Toolbar, Button, Flashcard],
   template: `
     <section class="flashcards">
       @if(!flashcardsStore.learningStarted()) {
@@ -40,27 +41,9 @@ import { Button } from '../shared/ui/button';
         (click)="flashcardsStore.drawAnother()"
       ></app-button>
 
-      <article class="card">
-        <div class="badge">
-          {{ flashcardsStore.currentFlashcard().category }}
-        </div>
-        <h2 class="question">
-          {{ flashcardsStore.currentFlashcard().question }}
-        </h2>
-
-        @if(flashcardsStore.revealed()) {
-        <div class="answer">
-          <pre>{{ flashcardsStore.currentFlashcard().answer }}</pre>
-        </div>
-        } @else {
-        <button
-          class="btn primary"
-          (click)="flashcardsStore.revealed.set(true)"
-        >
-          Reveal
-        </button>
-        }
-      </article>
+      <app-flashcard
+        [flashcard]="flashcardsStore.currentFlashcard()"
+      ></app-flashcard>
       }
     </section>
   `,

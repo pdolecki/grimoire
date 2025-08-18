@@ -15,7 +15,6 @@ export class FlashcardsStore {
   );
 
   readonly learningStarted = signal<boolean>(false);
-  readonly revealed = signal(false);
   readonly currentFlashcard = signal(this.getRandomFlashcard());
 
   readonly isCategorySelected = (id: string) =>
@@ -38,7 +37,6 @@ export class FlashcardsStore {
   }
 
   getRandomFlashcard() {
-    this.revealed.set(false);
     const randomIndex = Math.floor(
       Math.random() * this.selectedFlashcards().length
     );

@@ -13,7 +13,7 @@ import { CATEGORIES } from './constants/categories';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [SectionHeader, Card, Toolbar, Button, Flashcard],
   template: `
-    <section class="flashcards">
+    <div class="flashcards">
       @if(!flashcardsStore.learningStarted()) {
       <section class="flashcards__module-selection">
         <app-section-header
@@ -37,16 +37,18 @@ import { CATEGORIES } from './constants/categories';
         </div>
       </section>
       } @else {
-      <app-button
-        label="Draw another"
-        (click)="flashcardsStore.drawAnother()"
-      ></app-button>
+      <section class="flashcards__study">
+        <app-button
+          label="Draw another"
+          (click)="flashcardsStore.drawAnother()"
+        ></app-button>
 
-      <app-flashcard
-        [flashcard]="flashcardsStore.currentFlashcard()"
-      ></app-flashcard>
+        <app-flashcard
+          [flashcard]="flashcardsStore.currentFlashcard()"
+        ></app-flashcard>
+      </section>
       }
-    </section>
+    </div>
   `,
   styles: [
     `
@@ -68,7 +70,16 @@ import { CATEGORIES } from './constants/categories';
             }
           }
         }
-        @media (max-width: 768px) {
+        &__study {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: var(--sz-30);
+        }
+      }
+      @media (max-width: 768px) {
+        .flashcards {
+          padding: var(--sz-120) var(--sz-4);
           &__module-selection {
             display: flex;
             flex-direction: column;

@@ -10,6 +10,10 @@ export const routes: Routes = [
     loadComponent: () => import('./flashcards/flashcards'),
   },
   {
+    path: 'articles',
+    loadComponent: () => import('./articles/articles'),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',

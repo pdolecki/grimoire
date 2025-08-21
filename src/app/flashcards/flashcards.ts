@@ -53,8 +53,6 @@ import { CATEGORIES } from './constants/categories';
   styles: [
     `
       .flashcards {
-        margin: var(--nav-heigh) auto;
-        padding: var(--sz-120) var(--sz-30);
         &__module-selection {
           display: flex;
           flex-direction: column;

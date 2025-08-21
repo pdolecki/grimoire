@@ -31,8 +31,6 @@ import { Button } from '../../shared/ui/button';
   styles: [
     `
       .hero {
-        min-height: 100dvh;
-        padding: var(--sz-120) var(--sz-30);
         display: flex;
         flex-direction: column;
         justify-content: center;

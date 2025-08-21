@@ -10,10 +10,17 @@ import { Navbar } from './shell/navbar/navbar';
   template: `
     <app-navbar></app-navbar>
     <app-background></app-background>
-    <main>
+    <main class="page">
       <router-outlet />
     </main>
   `,
-  styles: [],
+  styles: [
+    `
+      .page {
+        margin: var(--nav-heigh) auto;
+        padding: var(--sz-120) var(--sz-30);
+      }
+    `,
+  ],
 })
 export class App {}

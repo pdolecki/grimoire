@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FlashcardsStore } from './data-access/flashcards-store';
 import { SectionHeader } from '../shared/ui/section-header';
 import { Toolbar } from './ui/toolbar';
-import { Card } from '../shared/ui/card';
 import { Button } from '../shared/ui/button';
 import { Flashcard } from './ui/flashcard';
 import { CATEGORIES } from './constants/categories';
+import { Card } from '../shared/ui/card';
 
 @Component({
   selector: 'app-flashcards',

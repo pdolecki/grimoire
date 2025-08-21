@@ -11,7 +11,8 @@ export const routes: Routes = [
   },
   {
     path: 'articles',
-    loadComponent: () => import('./articles/articles'),
+    loadChildren: () =>
+      import('./articles/articles.routes').then((m) => m.routes),
   },
   {
     path: '**',

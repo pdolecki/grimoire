@@ -16,10 +16,10 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     `
       .section-header {
         text-align: center;
-        margin-bottom: var(--sz-80);
+        margin: 0 0 var(--sz-80);
         &__title {
           text-transform: uppercase;
-          margin-bottom: var(--sz-18);
+          margin: 0 0 var(--sz-18);
           font-size: var(--sz-50);
           font-weight: 800;
           letter-spacing: 2px;

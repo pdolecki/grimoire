@@ -9,10 +9,9 @@ import { Article } from '../ui/article';
   template: `
     <app-article
       title="Angular 20: Pragmatic Signals Everywhere"
-      date="2025-08-10"
       description="A field guide to adopting signals in real code without rewriting the world."
       [tags]="['Angular', 'Signals']"
-      cover="/assets/covers/signals.png"
+      cover="/articles/1.png"
     >
       <h2>Why signals?</h2>
       <p>

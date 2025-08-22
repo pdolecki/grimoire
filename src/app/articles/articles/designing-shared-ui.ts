@@ -9,10 +9,9 @@ import { Article } from '../ui/article';
   template: `
     <app-article
       title="Designing a Shared UI Library that Ages Well"
-      date="2025-08-18"
       description="Naming, boundaries, and tiny components that scale."
       [tags]="['Architecture', 'Design']"
-      cover="/assets/covers/shared-ui.png"
+      cover="/articles/1.png"
     >
       <h2>Start tiny</h2>
       <p>

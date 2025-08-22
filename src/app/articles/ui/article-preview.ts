@@ -40,6 +40,9 @@ import { Badge } from '../../shared/ui/badge';
         padding: var(--sz-40);
         backdrop-filter: blur(10px);
         box-shadow: 0 20px 50px var(--cl-primary-02);
+        &:hover {
+          cursor: pointer
+        }
         &__image {
           width: 100%;
         }

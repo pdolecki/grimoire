@@ -9,10 +9,9 @@ import { Article } from '../ui/article';
   template: `
     <app-article
       title="Zoneless Change Detection: When & How"
-      date="2025-08-15"
       description="Run Angular without zone.js, safely. Pitfalls, patterns, and checklists."
       [tags]="['Angular', 'Performance']"
-      cover="/assets/covers/zoneless.png"
+      cover="/articles/1.png"
     >
       <h2>When zoneless makes sense</h2>
       <p>

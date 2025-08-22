@@ -5,15 +5,15 @@ import {
   signal,
 } from '@angular/core';
 import { FlashcardData } from '../interfaces/flashcard-data';
+import { Badge } from '../../shared/ui/badge';
 
 @Component({
   selector: 'app-flashcard',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [Badge],
   template: `
     <article class="flashcard">
-      <span class="flashcard__badge">
-        {{ flashcard().category }}
-      </span>
+      <app-badge [label]="flashcard().category"></app-badge>
 
       <h2 class="flashcard__question">
         {{ flashcard().question }}
@@ -30,11 +30,6 @@ import { FlashcardData } from '../interfaces/flashcard-data';
         padding: var(--sz-20);
         backdrop-filter: blur(10px);
         box-shadow: 0 20px 50px var(--cl-primary-02);
-        &__badge {
-          color: var(--cl-accent-b);
-          background: var(--cl-dark-04);
-          padding: var(--sz-10) var(--sz-14);
-        }
         &__question {
           color: var(--cl-primary);
         }

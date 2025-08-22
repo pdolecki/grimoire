@@ -2,80 +2,64 @@ import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArticlePreviewData } from '../interfaces/article-preview-data';
+import { Badge } from '../../shared/ui/badge';
 
 @Component({
   selector: 'app-article-preview',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, NgOptimizedImage],
+  imports: [RouterLink, Badge],
   template: `
-    <li class="card">
-      <a [routerLink]="['/articles', articlePreview().slug]">
-        @if (articlePreview().cover) {
-        <img
-          [ngSrc]="articlePreview().cover!"
-          width="500"
-          height="420"
-          alt=""
-        />
-        }
-        <h2>{{ articlePreview().title }}</h2>
-        <p class="muted">{{ articlePreview().description }}</p>
-        <div class="sub">
-          <time [attr.datetime]="articlePreview().date">{{
-            articlePreview().date
-          }}</time>
-          @if (articlePreview().tags?.length) {
-          <span class="dot">•</span>
-          <ul class="tags">
-            @for (t of articlePreview().tags!; track $index) {
-            <li>{{ t }}</li>
-            }
-          </ul>
-          }
-        </div>
-      </a>
-    </li>
+    <article
+      class="article-preview"
+      [routerLink]="['/articles', articlePreview().slug]"
+    >
+      @if (articlePreview().cover) {
+      <img class="article-preview__image" [src]="articlePreview().cover!" />
+      }
+
+      <h2 class="article-preview__title">{{ articlePreview().title }}</h2>
+
+      <p class="article-preview__description">
+        {{ articlePreview().description }}
+      </p>
+
+      <div class="article-preview__tags">
+        @if (articlePreview().tags) { @for (tag of articlePreview().tags!; track
+        $index) {
+        <app-badge [label]="tag"></app-badge>
+        } }
+      </div>
+    </article>
   `,
   styles: [
     `
-      .card {
-        border: 1px solid #243041;
-        border-radius: 16px;
-        overflow: hidden;
-        background: #0f1623;
-      }
-      .card a {
-        display: block;
-        padding: 16px;
-        color: inherit;
-        text-decoration: none;
-      }
-      .muted {
-        color: #9aa5b1;
-      }
-      .sub {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        color: #9aa5b1;
-      }
-      .tags {
-        display: flex;
-        gap: 0.4rem;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-      .tags li {
-        padding: 2px 8px;
-        border-radius: 999px;
-        background: rgba(99, 102, 241, 0.12);
-        border: 1px solid rgba(99, 102, 241, 0.35);
-        color: #c7d2fe;
-        font-size: 12px;
-      }
-      .dot {
-        opacity: 0.6;
+      .article-preview {
+        height: 100%;
+        background: var(--cl-dark-02);
+        border: 1px solid var(--cl-light-02);
+        padding: var(--sz-40);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 20px 50px var(--cl-primary-02);
+        &__image {
+          width: 100%;
+        }
+        &__title {
+          text-transform: uppercase;
+          font-size: var(--sz-22);
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: var(--cl-primary);
+          margin: var(--sz-20) 0 0 0;
+        }
+        &__description {
+          margin-top: var(--sz-10);
+          color: var(--cl-light-06);
+          line-height: var(--sz-26);
+        }
+        &__tags {
+          display: flex;
+          gap: var(--sz-10);
+        }
       }
     `,
   ],

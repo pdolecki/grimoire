@@ -15,41 +15,36 @@ import { ArticlePreview } from './ui/article-preview';
         description="Browse the latest articles to explore best practices, tips, and deep dives on frontend development."
       ></app-section-header>
 
-      <ul class="grid">
+      <div class="articles__grid">
         @for (articlePreview of articlesPreviews(); track articlePreview.slug) {
         <app-article-preview
           [articlePreview]="articlePreview"
         ></app-article-preview>
         }
-      </ul>
+      </div>
     </section>
   `,
   styles: [
     `
       .articles {
-        max-width: 960px;
-        margin: 0 auto;
-        padding: 24px;
         &__grid {
-          .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--sz-50);
-            align-items: stretch;
-            & > app-card {
-              display: block;
-              height: 100%;
-            }
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: var(--sz-20);
+          align-items: stretch;
+          & > app-card {
+            display: block;
+            height: 100%;
           }
         }
       }
-      .grid {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        display: grid;
-        gap: 16px;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      @media (max-width: 768px) {
+        .articles {
+          &__grid {
+            grid-template-columns: 1fr;
+            gap: var(--sz-30);
+          }
+        }
       }
     `,
   ],

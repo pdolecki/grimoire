@@ -1,4 +1,3 @@
-import { NgOptimizedImage } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ArticlePreviewData } from '../interfaces/article-preview-data';
@@ -40,11 +39,15 @@ import { Badge } from '../../shared/ui/badge';
         padding: var(--sz-40);
         backdrop-filter: blur(10px);
         box-shadow: 0 20px 50px var(--cl-primary-02);
+        display: flex;
+        flex-direction: column;
+        gap: var(--sz-14);
         &:hover {
-          cursor: pointer
+          cursor: pointer;
         }
         &__image {
           width: 100%;
+          filter: blur(1px) brightness(0.7) contrast(1.05) saturate(0.9);
         }
         &__title {
           text-transform: uppercase;

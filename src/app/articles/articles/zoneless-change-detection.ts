@@ -1,17 +1,15 @@
-// app/features/articles/posts/zoneless-change-detection.ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Article } from '../ui/article';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Article],
   template: `
     <app-article
       title="Zoneless Change Detection: When & How"
       description="Run Angular without zone.js, safely. Pitfalls, patterns, and checklists."
-      [tags]="['Angular', 'Performance']"
-      cover="/articles/1.png"
+      [tags]="['Angular']"
+      cover="/articles/zoneless-change-detection.png"
     >
       <h2>When zoneless makes sense</h2>
       <p>

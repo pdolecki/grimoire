@@ -1,17 +1,15 @@
-// app/features/articles/posts/angular-20-signals.ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Article } from '../ui/article';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Article],
   template: `
     <app-article
       title="Angular 20: Pragmatic Signals Everywhere"
       description="A field guide to adopting signals in real code without rewriting the world."
-      [tags]="['Angular', 'Signals']"
-      cover="/articles/1.png"
+      [tags]="['Angular']"
+      cover="/articles/angular-20-signals.png"
     >
       <h2>Why signals?</h2>
       <p>
@@ -43,7 +41,7 @@ import { Article } from '../ui/article';
         <strong>Takeaway:</strong> adopt signals incrementally—edges first, then
         view models, then stores.
       </p>
-    </app-article>
+    </app-article> 
   `,
 })
 export class PostAngular20Signals {}

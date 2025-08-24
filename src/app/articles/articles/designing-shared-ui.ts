@@ -1,17 +1,15 @@
-// app/features/articles/posts/designing-shared-ui.ts
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Article } from '../ui/article';
 
 @Component({
-  standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [Article],
   template: `
     <app-article
       title="Designing a Shared UI Library that Ages Well"
       description="Naming, boundaries, and tiny components that scale."
-      [tags]="['Architecture', 'Design']"
-      cover="/articles/1.png"
+      [tags]="['General', 'Angular']"
+      cover="/articles/designing-shared-ui.png"
     >
       <h2>Start tiny</h2>
       <p>

@@ -949,26 +949,69 @@ export const FLASHCARDS: FlashcardData[] = [
     `,
     category: 'WEB',
   },
+  {
+    question: 'Ways of connecting JS to HTML?',
+    answer: `
+    There are three main ways to connect JavaScript to HTML:
+
+    1) INLINE SCRIPTING
+      - Using the "onclick", "onchange", etc. attributes directly on HTML elements.
+      - Example: <button onclick="alert('Hello')">Click me</button>
+      - Generally discouraged in modern development because it mixes structure and behavior.
+
+    2) INTERNAL SCRIPT (in the same HTML file)
+      - Adding a <script> block inside the HTML file.
+      - Example:
+        <script>
+          console.log('Hello from inline script');
+        </script>
+      - Useful for quick demos, but not scalable for larger apps.
+
+    3) EXTERNAL SCRIPT (recommended)
+      - Linking a separate .js file using the <script src="..."></script> tag.
+      - Example:
+        <script src="app.js"></script>
+      - Keeps code organized and maintainable.
+
+    ADDITIONAL NOTES
+    • <script> tags can be placed in <head> or at the bottom of <body>.
+    • Adding the "defer" attribute loads scripts in parallel but executes them after the HTML is parsed.
+    • Adding the "async" attribute loads scripts in parallel and executes them as soon as they finish, which may not preserve order.
+    • Modern best practice: put <script src="..." defer></script> before </body> for predictable and efficient loading.
+  `,
+    category: 'HTML/CSS',
+  },
+  {
+    question: 'What to use id or class selectors in HTML/CSS?',
+    answer: `
+    ID SELECTORS (#id)
+    • Represent a single unique element on the page.
+    • An ID should be used only once per page.
+    • In CSS, IDs have higher specificity than classes.
+    • In JavaScript, IDs are often used for direct element access (document.getElementById).
+    • Example: <div id="header"></div> → #header { color: red; }
+
+    CLASS SELECTORS (.class)
+    • Represent one or more elements that share the same style or behavior.
+    • Classes can be reused across multiple elements.
+    • They are more flexible and maintainable than IDs for styling.
+    • Example: <div class="card"></div> → .card { box-shadow: ...; }
+
+    BEST PRACTICE
+    • Use classes for styling and reusable patterns.
+    • Reserve IDs for unique elements that require specific targeting (e.g., JavaScript hooks, internal page anchors).
+    • Avoid overusing IDs in CSS because they increase specificity and can make overriding styles harder.
+  `,
+    category: 'HTML/CSS',
+  },
   // {
   //   question: '',
   //   answer: ``,
-  //   category: 'WEB',
-  // },
-  // {
-  //   question: 'Ways of connecting JS to HTML?',
-  //   answer: ``,
-  //   category: 'JavaScript'
-  // },
-  // {
-  //   question: 'What to use id or class selectors in HTML/CSS?',
-  //   answer: ``,
+  //   category: '',
   // },
   // {
   //   question: '',
   //   answer: ``,
-  // },
-  // {
-  //   question: '',
-  //   answer: ``,
+  //   category: '',
   // },
 ];

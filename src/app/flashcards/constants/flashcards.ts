@@ -937,6 +937,23 @@ export const FLASHCARDS: FlashcardData[] = [
     `,
     category: 'Angular',
   },
+  {
+    question:
+      'What is Webpack? What is it for? Tree Shaking? Dependency Graph?',
+    answer: `
+    Webpack is a module bundler. It takes multiple JavaScript files (and other assets) and bundles them into optimized files that browsers can understand. It starts from defined entry points, builds a dependency graph, handles imports/exports, and applies various optimizations.
+
+    The dependency graph is the structure Webpack builds by analyzing all modules and their imports. Starting from the entry point, it follows every import, forming a graph-like (tree-like) structure of the entire application. This graph allows Webpack to determine which modules are needed and how they are connected.
+
+    One important optimization is tree shaking. Tree shaking removes unused exports from the final bundle. It only works with ES Modules (ESM) because their imports/exports are static — meaning Webpack can know exactly what is imported at build time. CommonJS (require) is dynamic (require() is a runtime function call), so Webpack cannot reliably detect unused code in that format.
+    `,
+    category: 'WEB',
+  },
+  // {
+  //   question: '',
+  //   answer: ``,
+  //   category: 'WEB',
+  // },
   // {
   //   question: 'Ways of connecting JS to HTML?',
   //   answer: ``,

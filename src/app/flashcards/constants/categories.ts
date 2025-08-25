@@ -26,6 +26,12 @@ export const CATEGORIES: CardData[] = [
       'Semantic HTML, responsive layouts, and modern CSS techniques for clean, accessible, and maintainable user interfaces.',
   },
   {
+    icon: '🕸️',
+    title: 'Web',
+    caption:
+      'Browser internals, accessibility, APIs, bundlers, and essential tools like Webpack, Vite, and DevTools for modern web development.',
+  },
+  {
     icon: '🌐',
     title: 'General',
     caption:

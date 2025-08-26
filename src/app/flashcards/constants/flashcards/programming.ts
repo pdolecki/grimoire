@@ -2,113 +2,117 @@ import { FlashcardData } from '../../models/flashcard-data';
 
 export const FLASHCARDS_PROGRAMMING: FlashcardData[] = [
   {
-    question: 'What is the difference between composition and inheritance?',
+    question: 'What is the difference between Composition and Inheritance?',
     answer: `
-    Composition - one class contains instances of other classes or functions to use their behavior.
-    Has-a relationship - Car has an Engine, UIComponent, uses TooltipService
+    Composition 
+    One class contains instances of other classes or functions to use their behavior. (HAS-A RELATIONSHIP)
+    Example:
+    Car has Engine, UIComponent, uses tooltipService
 
-    Inheritance - one class extends another, reusing and overriding its behavior.
-    Is-a relationship - AdminUser extends User
+    Inheritance
+    One class extends another, reusing and overriding its behavior. (IS-A RELATIONSHIP)
+    Example:
+    AdminUser extends User
     `,
     category: 'Programming',
   },
   {
-    question: 'What is SOLID and how it applies to Angular development?',
+    question: 'What is SOLID? What does it stand for?',
     answer: `
-    S - Single Responsibility Principle (SRP)
-    Each component, service, or class should have one well-defined responsibility. In Angular, we often split responsibilities by using services for business logic and keeping components focused on rendering and interaction.
+    SOLID is a set of object-oriented design principles. It helps make code more maintainable, flexible and scalable.
 
-    O - Open/Closed Principle (OCP)
-    Code should be open for extenstion but closed for modification. In Angular, this often means desigin services or components so they can be extended or customized via injection, configuration, or strategy pattern, rather than editing their internals (e.g. Instead of changing LoggerService, you inject a different one via a factory or token).
+    Single Responsibility
+    Each piece of our code (class, module, function) should have only one reason to change. It should have only one responsibility.
 
-    L - Liskov Substition Principle (LSP)
-    Subclasses should be substitutable for their base classes without breaking the app. In Angular, that could mean creating a BaseButtonComponent and extending it - but the child components must keep the same API and behavior contract (e.g. inputs, outputs, lifecycle). 
+    Open/Closed 
+    Software entities should be open for extension, but closed for modification. We should be able to add new behavior without altering the existing one.
 
-    I - Interface Segregation Principe (ISP)
-    Prefer many small, focused interfaces over one large, bloated one. In Angular this might apply to Form models, DTOs, or state slices - where splitting interfaces keeps types clean and easier to extend or reuse.
+    Liskov Substitution 
+    Subtypes must be substitutable for their base types without breaking the correctness of the program. Derived classes should honor the contracts of their parents.
 
-    D - Dependency Inversion Principle (DIP)
-    High-level categorys shouldn't depend on low-level categorys - both should depend on abstractions. In Angular, we avoid directly using 3rd-party services inside components. Instead, we create facade services that depend on interfaces, and inject implementations. This keeps the app testable and swappable.
+    Interface Segregation
+    Clients should not be forced to depend on methods they don't use. It's better to have many small and specific interfaces than one large, general-purpose one.
+
+    Dependency Inversion
+    High-level modules should not depend on low-level modules. Both should depend on abstractions and abstractions should not depend on details (details should depend on abstractions).
     `,
     category: 'Programming',
   },
   {
     question:
-      'Difference between a monolith and a microservice architecture? When to choose which?',
+      'What is the difference between a monolith and a microservice architecture?',
     answer: `
-    A monolith is a single, unified application where all features are built and deployed together.
-    A microservice architecture breaks the app into independent services, each owning its own domain logic. These services communicate via APIs.
+    Monolith
+    Is a single, unified application where all features are built and deployed together.
 
-    Rule of thumb would be to start with a well-structured monolith and extract microservices only when scaling, ownership, or performance demand it.
+    Microservice
+    It is an application that is broken into independent pieces and services, each contains its own domain logic. They communicate via APIs.
+
+    Example
+    Usually if not sure, we should start with a well-structured monolith and extract microservices only when scaling, ownership or performance demand it.
     `,
     category: 'Programming',
-  }, {
+  },
+  {
     question: 'What is Domain Driven Design?',
     answer: `
-    DDD is a software design approach focused on modeling software based on real business domains, using ubiquitus language and organizing code around the business logic, not technical layers.
+    Domain Driven Desing (DDD)
+    It is a software design approach that is focused on modeling software based on real business domains. It is using ubiquitus language and organizes code around the business logic, not technical layers.
 
-    It helps to keep the code aligned with the real business, design modular and maintainable system, avoids models with just data and without behavior and makes refactoring and scaling easier as your domain grows.
+    It helps to keep the code aligned with the real business, design modular and maintainable system. It avoids models with just data and without behavior and makes refactoring and scaling easier as domain grows.
     `,
     category: 'Programming',
-  }, {
+  },
+  {
     question: 'Data Structures - what they are and what for?',
     answer: `
-    Data structures are ways of organizing and storing data to enable efficient access and modification. Choosing the right data structure is important for performance and clarity of logic.
-    Some examples:
-    1. Array - ordered collection of elements accessed by index. Great for ordered lists.
-    2. Linked List - each item (node) points to the next. Usefult when you frequently add/remove from the beginning.
+    Data Structures
+    They are a way of organizing and storing data to enable efficient access and modification. Choosing the right one is important for performance and clarity of logic.
+
+    Example:
+    1. Array - ordered collection of elements accessed by index, great for ordered lists.
+    2. Linked List - each item (node) points to the next. Useful for frequently adding and removing from the beggining.
     3. Stack LIFO - Used for undo history, recursion, etc.
-    4. Queue FIFO - Used for async tasks, schedulers.
-    5. Hash Table/Map - Key-value pairs with fast access. Perfect for caching or lookups.
-    6. Tree - hierarchical structure (e.g. DOM is a tree). Used in sorting, searching (BST), representing structure.
-    7. Graph - Set of nodes and edges, used for modeling complex relationships (e.g. routing, social networks).
+    4. Queue FIFO - Used for async tasks, schedulers, etc.
+    5. Hash Table/Map - key-value paris with fast access, perfect for caching or lookups.
+    6. Tree - hierarchical structure (e.g. DOM), used in sorting, searching (BST) and respresenting structure.
+    7. Graph - Set of noeds and edges, used for modeling complex relationsips (e.g. routing, social networks).
     `,
     category: 'Programming',
-  },  {
-    question:
-      'What are WebSockets? How do they differ from HTTP? Some additional informations?',
+  },
+  {
+    question: 'What are WebSockets and how do they differ from HTTP?',
     answer: `
-    WebSocket is a communication protocol that provides a persistent, full-duplex connection between the client (browser) and server. It's perfect for real-time applications like live chats, live dashboards, multiplayer games, collaborative apps (like google docs).
+    WebSocket
+    It is a communication protocol that creates a persistent, full-duplex connection between a client and a server. It is designed for real-time applications like chat, live dashboards, multiplayer games etc.
 
-    How is it different from HTTP?
-    1. They are based on persistent connection (vs request-response only).
-    2. Direction is 2 way, client and server (vs one way, client to server).
-    3. They have low overhead after initial handshake (vs high).
-    4. They have very low latency (vs higher).
-    5. They are used for real-time apps (vs static websites, APIs).
-
-    Alternatives or Complements
-    1. Socket.IO - JS library that simplifies WebSocket usage and adds fallbacks (like long polling).
-    2. Firebase Realtime Database - Real time backend-as-a-service.
+    Key differences from HTTP:
+    1. Connection - persistent (vs request/response)
+    2. Direction - bi-directional (vs client -> server only)
+    3. Overhead - lightweight after initial handshake (vs repeated headers)
+    4. Latency - very low (vs higher)
+    6. Use cases - real time, event-driven apps (vs static content, REST APIs)
     `,
 
     category: 'Programming',
   },
   {
-    question: 'What are WEB Components? How they work?',
+    question: 'What are Web Components and how do they work?',
     answer: `
-    Web Components are a set of standardized browser APIs that allow developers to create reusable, encapsulated custom elements - like your own HTML tags - that work natively across modern browsers without needing a framework.
-
-    They consist of 4 main technologies:
-    1. Custom Elements
-    - define your own HTML elements
-    - use class MyElement extends HTMLElement and customElements.define()
-    2. Shadow DOM
-    - provides encapsulation form styles and markup
-    - prevents styles from leaking in or out
-    - created using this.attachShadow({ mode: 'open' })
-    3. HTML Templates (<template>)
-    - define chunks of markup that aren't rendered until used
-    - paired with JS to clone and attach to the DOM
-    4. ES categorys
-    - import/export you rcomponents in a modular way
-    - enables reusability and lazy loading
-
-    Why to use Web Components?
-    - framework-agnostic (can be used in Angular, React, or plain HTML)
-    - encapsulated (styles and logic stay scoped)
-    - reusable & portable (build once, use anywhere)
-    - native to browser (no runtime or extra libraries required)
+    Web Components
+    They are a set of standardized browser APIs that let developers create reausable and encapsulated custom elements (like your own HTML tags). They work across all modern browsers without frameworks.
+    
+    Core technologies:
+    1. Custom ELements - define new HTML elements
+    2. Shadow DOM - encapsulated markup & styles
+    3. HTML Templates - define markup snippets that arent rendered until cloned and attached
+    4. ES Modules - enable modularity, reusability and lazy loading
+  
+    Why use them:
+    - Framework agnostic
+    - Fully encapsulated 
+    - Portable and reusable
+    - Native
     `,
     category: 'Programming',
   },

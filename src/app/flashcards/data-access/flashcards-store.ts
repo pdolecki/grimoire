@@ -1,7 +1,7 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { FLASHCARDS } from '../constants/flashcards';
-import { CATEGORIES } from '../constants/categories';
-import { FlashcardData } from '../interfaces/flashcard-data';
+import { FLASHCARDS_CARDS } from '../constants/flashcards-cards';
+import { CATEGORIES_CARDS } from '../constants/categories-cards';
+import { FlashcardData } from '../models/flashcard-data';
 
 @Injectable({
   providedIn: 'root',
@@ -9,10 +9,12 @@ import { FlashcardData } from '../interfaces/flashcard-data';
 export class FlashcardsStore {
   readonly selectedCategories = signal<Set<string>>(new Set());
   readonly learningStarted = signal<boolean>(false);
-  readonly currentFlashcard = signal<FlashcardData>(FLASHCARDS[0]);
+  readonly currentFlashcard = signal<FlashcardData>(FLASHCARDS_CARDS[0]);
 
   readonly selectedFlashcards = computed(() =>
-    FLASHCARDS.filter((fc) => this.selectedCategories().has(fc.category))
+    FLASHCARDS_CARDS.filter((flashcard) =>
+      this.selectedCategories().has(flashcard.category)
+    )
   );
 
   readonly isCategorySelected = (id: string) =>
@@ -27,7 +29,7 @@ export class FlashcardsStore {
   }
 
   selectAllCategories() {
-    this.selectedCategories.set(new Set(CATEGORIES.map((c) => c.title)));
+    this.selectedCategories.set(new Set(CATEGORIES_CARDS.map((c) => c.title)));
   }
 
   clearSelectedCategories() {
@@ -45,7 +47,7 @@ export class FlashcardsStore {
 
   private pickRandom(): FlashcardData {
     const pool = this.selectedFlashcards();
-    if (pool.length === 0) return FLASHCARDS[0];
+    if (pool.length === 0) return FLASHCARDS_CARDS[0];
     const idx = Math.floor(Math.random() * pool.length);
     return pool[idx] ?? null;
   }

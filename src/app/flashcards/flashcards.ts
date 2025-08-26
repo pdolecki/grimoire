@@ -4,7 +4,7 @@ import { SectionHeader } from '../shared/ui/section-header';
 import { Toolbar } from './ui/toolbar';
 import { Button } from '../shared/ui/button';
 import { Flashcard } from './ui/flashcard';
-import { CATEGORIES } from './constants/categories';
+import { CATEGORIES_CARDS } from './constants/categories-cards';
 import { Card } from '../shared/ui/card';
 
 @Component({
@@ -15,10 +15,10 @@ import { Card } from '../shared/ui/card';
   template: `
     <div class="flashcards">
       @if(!flashcardsStore.learningStarted()) {
-      <section class="flashcards__module-selection">
+      <section class="flashcards__category-selection">
         <app-section-header
-          title="Modules"
-          description="Choose the flashcard modules you’re interested in studying or continue the last session."
+          title="Categories"
+          description="Choose the flashcard categories you’re interested in studying or continue the last session."
         />
         <app-toolbar
           [selectedCount]="flashcardsStore.selectedCategories().size"
@@ -27,11 +27,13 @@ import { Card } from '../shared/ui/card';
           (clear)="flashcardsStore.clearSelectedCategories()"
         />
         <div class="grid">
-          @for (category of CATEGORIES; track category.title) {
+          @for (categoryCard of CATEGORIES_CARDS; track categoryCard.title) {
           <app-card
-            [cardData]="category"
-            [selected]="flashcardsStore.isCategorySelected(category.title)"
-            (toggled)="flashcardsStore.toggleCategorySelection(category.title)"
+            [cardData]="categoryCard"
+            [selected]="flashcardsStore.isCategorySelected(categoryCard.title)"
+            (toggled)="
+              flashcardsStore.toggleCategorySelection(categoryCard.title)
+            "
           />
           }
         </div>
@@ -53,7 +55,7 @@ import { Card } from '../shared/ui/card';
   styles: [
     `
       .flashcards {
-        &__module-selection {
+        &__category-selection {
           display: flex;
           flex-direction: column;
           gap: var(--sz-30);
@@ -78,7 +80,7 @@ import { Card } from '../shared/ui/card';
       @media (max-width: 768px) {
         .flashcards {
           padding: var(--sz-120) var(--sz-4);
-          &__module-selection {
+          &__category-selection {
             display: flex;
             flex-direction: column;
             gap: var(--sz-30);
@@ -93,7 +95,7 @@ import { Card } from '../shared/ui/card';
   ],
 })
 export default class Flashcards {
-  readonly CATEGORIES = CATEGORIES;
+  readonly CATEGORIES_CARDS = CATEGORIES_CARDS;
 
   protected readonly flashcardsStore = inject(FlashcardsStore);
 }

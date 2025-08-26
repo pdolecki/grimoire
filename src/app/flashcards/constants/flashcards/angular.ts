@@ -1,35 +1,6 @@
-import { FlashcardData } from '../interfaces/flashcard-data';
+import { FlashcardData } from '../../models/flashcard-data';
 
-export const FLASHCARDS: FlashcardData[] = [
-  {
-    question: 'What is hoisting in JavaScript?',
-    answer: `
-    Hoisting in JS means that variable and function declarations (not initializations) are moved to the top of their scope during compilation phase (before execution).
-    1. var:
-    - hoisted and initialized with undefined
-    - it can be referenced before declaration
-    2. let, const:
-    - hoisted, but placed in Temporal Dead Zone
-    - referencing before declaration throws a ReferenceError
-    3. function declarations:
-    - fully hoisted 
-    - can be called before their definition
-    4. function expression:
-    - treated like variables, only name is hoisted
-    - calling them early results in TypeError
-    `,
-    category: 'JavaScript',
-  },
-  {
-    question: 'What is clousure in JavaScript and how can it be useful?',
-    answer: `
-    A clousure is a function that remembers the variables from the scope in which it was created. It applies even after the outer scope has finished execution.
-    Extra info:
-    - that is caused by JS functions forming a lexical closure (capture and retain access to their surrounding scope at the time of definition)
-    - in Angular we use that for creating private variables in services, building factory functions, managing callback state
-    `,
-    category: 'JavaScript',
-  },
+export const FLASHCARDS_ANGULAR: FlashcardData[] = [
   {
     question: 'How can you manage/propagate state in Angular?',
     answer: `
@@ -55,34 +26,21 @@ export const FLASHCARDS: FlashcardData[] = [
     question: 'What design patterns are used in Angular?',
     answer: `
     1. Dependency Injection
-    Services, tokens, modules are injected instead of being hardcoded. This promotes testability and separation of concerns.
+    Services, tokens, categorys are injected instead of being hardcoded. This promotes testability and separation of concerns.
     2. Observer Pattern
     Used in RxJS and component communication. Observables notify subscribers when data changes.
-    3. Module Pattern
-    NgModules and standalone components encapsulate functionality and scope.
+    3. category Pattern
+    Ngcategorys and standalone components encapsulate functionality and scope.
     4. Facade Pattern
     Common in state management (e.g. AuthFacade) to hide complexity of dependencies (e.g. NgRx, SignalStore) behind a clean API.
     5. Strategy Pattern
     Used when injecting different behaviors (e.g. different auth strategies). Can be implemented via interfaces + DI.
     6. Singleton Pattern
-    Angular Services provided in root or specific modules are singletos.
+    Angular Services provided in root or specific categorys are singletos.
     7. Template Pattern
     HTML templates define UI structure, with dynamic binding logic behind the scenes.
     `,
     category: 'Angular',
-  },
-  {
-    question: 'What is a difference between span and div in HTML?',
-    answer: `
-    div
-    Used to group blocks of content, starts on a new line.
-    Default - display: block, block-level, for layout and structure
-
-    span
-    Used to style or group inline text, without breaking the flow.
-    Default - display: inline, inline-level, for styling inline text
-    `,
-    category: 'HTML/CSS',
   },
   {
     question: 'What does the RxJS switchMap do?',
@@ -93,71 +51,6 @@ export const FLASHCARDS: FlashcardData[] = [
     - you want to cancel previous async operations if a new one starts
     `,
     category: 'Angular',
-  },
-  {
-    question: 'What is the difference between composition and inheritance?',
-    answer: `
-    Composition - one class contains instances of other classes or functions to use their behavior.
-    Has-a relationship - Car has an Engine, UIComponent, uses TooltipService
-
-    Inheritance - one class extends another, reusing and overriding its behavior.
-    Is-a relationship - AdminUser extends User
-    `,
-    category: 'General',
-  },
-  {
-    question: 'How to center a div conent?',
-    answer: `
-    margin: 0 auto; // width needs to bet
-
-    display: flex;
-    justify-content: center;  // horizontal
-    align-items: center;  // vertical
-
-    display: grid;
-    place-items: center;
-
-    text-align: center; // works for inline elements
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    `,
-    category: 'HTML/CSS',
-  },
-  {
-    question: 'What are TypeScript generics?',
-    answer: `
-    Generics in TypeScript let us write type-safe, reusable code that’s still flexible. We use a placeholder like <T>, and TypeScript infers or enforces the type when the function, class, or interface is used.
-
-    For example, in an app where we display multiple types of feature lists — each stored in a   different Firestore collection — instead of writing separate getCollection methods for each feature, we can create a generic function.
-    getCollection<T>(name: string): Observable<T[]> {
-      return collectionData(collection(this.firestore, name)) as Observable<T[]>;
-    }
-    `,
-    category: 'TypeScript',
-  },
-  {
-    question: 'What we get from using SCSS?',
-    answer: `
-    Reusable Variables
-    Declared on root level with $ prefix - e.g. $primary-color: #333; we later on use just background-color: $primary-color;
-
-    Nesting CSS selectors
-    Provides us with cleaner structure matching our HTML.
-
-    Mixins & Functions
-    Creating Reusable style logic without duplication. Simple example
-    @mixin flex-center {..style for flex-center}
-    .card { @include flex-center; }
-
-    Inheritance (mixins are better)
-    We can share base styles accross classes, simple example
-    %base-button {..styles}
-    .btn-primary { @extend %base-button }
-    `,
-    category: 'HTML/CSS',
   },
   {
     question:
@@ -190,16 +83,16 @@ export const FLASHCARDS: FlashcardData[] = [
     This limits unnecessary checks. Should be combined with signals or immutable data for better performance.
 
     Lazy Loading
-    Load feature modules oly when needed via Angular Router.
+    Load feature categorys oly when needed via Angular Router.
 
     Standalone Component
-    Reduce complexity and eliminate unnecessary modules.
+    Reduce complexity and eliminate unnecessary categorys.
 
     Bundle Size Optimizationns
     Use ng build --prod (or --configuration production) to enable: Tree shaking, minification, AOT Compilation. You can also use CLI's built-in source map analyzer to detect heavy libraries.
 
     Code Splitting & Preloading
-    You can split routes smartly and preload critical ones with PreloadAllModules, avoid putting everything in AppModule.
+    You can split routes smartly and preload critical ones with PreloadAllcategorys, avoid putting everything in Appcategory.
 
     Avoid Heavy Imports
     Import only what you use (e.g. don't import all of Angular Material). Use standalone components from Angular Material to avoid unused code.
@@ -233,7 +126,7 @@ export const FLASHCARDS: FlashcardData[] = [
       'How would you unit test a component that has a service injected and calls one of its methods during ngOnInit()?',
     answer: `
     First I'd create a mock version of the service, either plain object with Jasmine spies or using jest.fn() if using Jest.
-    In the test setup (TestBed.configureTestingModule) I'd provide this mock in place of the real service using the providers array.
+    In the test setup (TestBed.configureTestingcategory) I'd provide this mock in place of the real service using the providers array.
     Then, after creating the component via TestBed.createComponent, I'd call fixture.detectChanges() to trigger ngOnInit().
     Finally, I'd assert that the service method was called, ppossibly checking the arguments or the results if the method affects component state.
 
@@ -253,50 +146,12 @@ export const FLASHCARDS: FlashcardData[] = [
     `,
     category: 'Angular',
   },
-  {
-    question: 'What is SOLID and how it applies to Angular development?',
-    answer: `
-    S - Single Responsibility Principle (SRP)
-    Each component, service, or class should have one well-defined responsibility. In Angular, we often split responsibilities by using services for business logic and keeping components focused on rendering and interaction.
 
-    O - Open/Closed Principle (OCP)
-    Code should be open for extenstion but closed for modification. In Angular, this often means desigin services or components so they can be extended or customized via injection, configuration, or strategy pattern, rather than editing their internals (e.g. Instead of changing LoggerService, you inject a different one via a factory or token).
-
-    L - Liskov Substition Principle (LSP)
-    Subclasses should be substitutable for their base classes without breaking the app. In Angular, that could mean creating a BaseButtonComponent and extending it - but the child components must keep the same API and behavior contract (e.g. inputs, outputs, lifecycle). 
-
-    I - Interface Segregation Principe (ISP)
-    Prefer many small, focused interfaces over one large, bloated one. In Angular this might apply to Form models, DTOs, or state slices - where splitting interfaces keeps types clean and easier to extend or reuse.
-
-    D - Dependency Inversion Principle (DIP)
-    High-level modules shouldn't depend on low-level modules - both should depend on abstractions. In Angular, we avoid directly using 3rd-party services inside components. Instead, we create facade services that depend on interfaces, and inject implementations. This keeps the app testable and swappable.
-    `,
-    category: 'General',
-  },
-  {
-    question:
-      'What is the Event Loop in JS and how it manage async operations?',
-    answer: `
-    The Event Loop is the mechanism in JavaScript that handles asynchronous operations, allowing non-blocking code to run in a single-threaded environment.
-
-    1. JS runs a function -> it eneters the call stack.
-    2. If it hits something async (e.g. setTimeout), that is sent to Web APIs.
-    3. When async work completes, the callback is moved to a queue.
-    4. The Event Loop:
-    > waits until the stack is empty
-    > then runs all microtasks
-    > then runs one task from the macrotask queue
-    > repeats
-
-    The Event Loop keeps the JS engine resposive by coordinating when and how async callbacks are executed. It ensures microtasks (like Promises) run before macrotasks (like setTimeout).
-    `,
-    category: 'JavaScript',
-  },
   {
     question: 'What are Angular decorators, and how do they work?',
     answer: `
     Decorators in Angular are TypeScript functions that attach metadata to classes, methods, properties or parameters. They allow Angular's compiler and DI system to understand how to construct and use these elements at runtime.
-    1. Class decorators (Component, Directive, Module) - define what the class represents and how Angular should treat it.
+    1. Class decorators (Component, Directive, category) - define what the class represents and how Angular should treat it.
     2. Property decorators (Input, Output) - tell Angular to bind a property to external data or events.
     3. Method decorators (HostListener, HostBinding) - allow interaction with DOM events or element properties.
     4. Parameter decorators (Inject) - help Angular understand how to resolve constructor dependencies, especially when using tokens.
@@ -374,17 +229,6 @@ export const FLASHCARDS: FlashcardData[] = [
     category: 'Angular',
   },
   {
-    question:
-      'Difference between a monolith and a microservice architecture? When to choose which?',
-    answer: `
-    A monolith is a single, unified application where all features are built and deployed together.
-    A microservice architecture breaks the app into independent services, each owning its own domain logic. These services communicate via APIs.
-
-    Rule of thumb would be to start with a well-structured monolith and extract microservices only when scaling, ownership, or performance demand it.
-    `,
-    category: 'General',
-  },
-  {
     question: 'Angular forms - what are the options?',
     answer: `
     Template-Driven Forms
@@ -397,17 +241,7 @@ export const FLASHCARDS: FlashcardData[] = [
     They are based on Signals, uses builder-based API (createFormGroup, FormControl). They feel more reactive and declarative, they are fully integrated with Signals ecostystem and fine-grained reactivity.
     `,
     category: 'Angular',
-  },
-  {
-    question: 'What is Domain Driven Design?',
-    answer: `
-    DDD is a software design approach focused on modeling software based on real business domains, using ubiquitus language and organizing code around the business logic, not technical layers.
-
-    It helps to keep the code aligned with the real business, design modular and maintainable system, avoids models with just data and without behavior and makes refactoring and scaling easier as your domain grows.
-    `,
-    category: 'General',
-  },
-  {
+  },{
     question:
       'What are the most common tests in Angular? What are the best testing practices?',
     answer: `
@@ -424,36 +258,7 @@ export const FLASHCARDS: FlashcardData[] = [
     `,
     category: 'Angular',
   },
-  {
-    question: 'Data Structures - what they are and what for?',
-    answer: `
-    Data structures are ways of organizing and storing data to enable efficient access and modification. Choosing the right data structure is important for performance and clarity of logic.
-    Some examples:
-    1. Array - ordered collection of elements accessed by index. Great for ordered lists.
-    2. Linked List - each item (node) points to the next. Usefult when you frequently add/remove from the beginning.
-    3. Stack LIFO - Used for undo history, recursion, etc.
-    4. Queue FIFO - Used for async tasks, schedulers.
-    5. Hash Table/Map - Key-value pairs with fast access. Perfect for caching or lookups.
-    6. Tree - hierarchical structure (e.g. DOM is a tree). Used in sorting, searching (BST), representing structure.
-    7. Graph - Set of nodes and edges, used for modeling complex relationships (e.g. routing, social networks).
-    `,
-    category: 'General',
-  },
-  {
-    question: 'What is DOM?',
-    answer: `
-    Document Object Model is a programming interface that represents the structure of a web page as a tree of nodes (elements, attributes, text, etc.).
-    When the browser loads HTML, it parses it and buils the DOM - where each HTML tag becomes a node in a tree-like structure.
-    This structure lets JS interact with page:
-    - read or modify content (element.textContent, element.innerHtml)
-    - change styles (element.style)
-    - handle events (element.addEventListener)
-
-    In Angular we rarly manipulate the DOM directly, instead we use Angular own abstarction (Renderer, ViewRef, etc.) and handle DOM updates efficiently through change detection.
-    `,
-    category: 'General',
-  },
-  {
+   {
     question: 'What are Promises, Observables and Subjects?',
     answer: `
     Promise - represents a single future value from an asynchronous operation (e.g. HTTP call, file read). Key features:
@@ -505,25 +310,7 @@ export const FLASHCARDS: FlashcardData[] = [
     2. Interceptor - transparent, affects all HTTP calls
     `,
     category: 'Angular',
-  },
-  {
-    question: 'WEB Workers and Service Workers in Javascript?',
-    answer: `
-    A WEB Worker allows you to run JavaScript in a background thread, separate from the main UI thread. Use them to offload CPU-heavy tasks (like calculations, parsing large data, etc.) so your app doesn't freeze or become unresponsive.
-    - they do not have access to the DOM
-    - they communicate with the main thread via postMessage
-    - you can create them using the Worker constructor and pass in a script
-
-    A Service Worker is a type of proxy that runs in the background, independent of your web page, and intercepts network requests. We use them to enable offline support, cache assets or API responses, create PWAs, handle background sync and push notifications.
-    - they operate between the browser and network
-    - they run in a separate thread
-    - they can intercept and cache network requests using the Cache API
-    - they require HTTPS (except on localhost)
-    They have lifecycle of register > install > activate > fetch (events).
-    `,
-    category: 'JavaScript',
-  },
-  {
+  },  {
     question:
       'If we have in Angular service provided in root, but we add it to the providers array of standalone component - will it be the same instance as globally or a new one? Will it survive if the component gets destroyed?',
     answer: `
@@ -532,49 +319,7 @@ export const FLASHCARDS: FlashcardData[] = [
     `,
 
     category: 'Angular',
-  },
-  {
-    question: 'What are Promises, how can you cancel a Promise in JavaScript?',
-    answer: `
-    Promise is a built-in JS object that represents the eventual completion (or failure) of an asynchronous operation. It has 3 states:
-    - pending (initial state)
-    - fulfilled (operation completed successfully)
-    - rejected (operation failed)
-
-    Promises cannot be canceled natively once started. However we can simulate cancellation using:
-    - AbortController
-    - Custom Cancelable Promise Wrapper
-    It doesn't stop underlying task, just prevents .then() from resolving
-    `,
-
-    category: 'JavaScript',
-  },
-  {
-    question: 'What is async/await in JavaScript?',
-    answer: `
-    async/await is syntatic sugar over Promises. It makes asynchronous code look and behave like synchronous code.
-    - await pauses execution unil the Promise settles
-    - can only be used inside async function
-    - handles error with try catch block
-    `,
-    category: 'JavaScript',
-  },
-  {
-    question: 'What is Overloading in JavaScript and Angular?',
-    answer: `
-    Overloading - refers to defining multiple function signatures with the same name but different parameters (type, number, or both). It helps make code more flexible and expressive, depending on how a function is called. Use for:
-    - to handle different input types or formats in one function
-    - to improve readability and reduce code duplication
-
-    JavaScript 
-    Does not support real function overloading, it will just override declaration of function with the last one. We can simulate it using function with else-if blocks checking arguments.length and typeof arguments.
-
-    TypeScript (Angular also)
-    Supports overloading, you can define multiple signatures.
-    `,
-    category: 'JavaScript',
-  },
-  {
+  }, {
     question: 'What is @defer in Angular?',
     answer: `
     @defer is a block-based syntax that lets you lazy-load parts of the UI only when needed, without extra routing or manual logic.
@@ -686,28 +431,7 @@ export const FLASHCARDS: FlashcardData[] = [
     - delay(ms) - delays each emission
     `,
     category: 'Angular',
-  },
-  {
-    question:
-      'What are WebSockets? How do they differ from HTTP? Some additional informations?',
-    answer: `
-    WebSocket is a communication protocol that provides a persistent, full-duplex connection between the client (browser) and server. It's perfect for real-time applications like live chats, live dashboards, multiplayer games, collaborative apps (like google docs).
-
-    How is it different from HTTP?
-    1. They are based on persistent connection (vs request-response only).
-    2. Direction is 2 way, client and server (vs one way, client to server).
-    3. They have low overhead after initial handshake (vs high).
-    4. They have very low latency (vs higher).
-    5. They are used for real-time apps (vs static websites, APIs).
-
-    Alternatives or Complements
-    1. Socket.IO - JS library that simplifies WebSocket usage and adds fallbacks (like long polling).
-    2. Firebase Realtime Database - Real time backend-as-a-service.
-    `,
-
-    category: 'General',
-  },
-  {
+  },  {
     question:
       'You have a search field above a data table. Every time user types, it triggers a backend API call. There are too many requests. How would you handle this problem in Angular?',
     answer: `
@@ -770,36 +494,7 @@ export const FLASHCARDS: FlashcardData[] = [
     - consider auto-save logic with explicity Save button
     `,
     category: 'Angular',
-  },
-  {
-    question: 'What are WEB Components? How they work?',
-    answer: `
-    Web Components are a set of standardized browser APIs that allow developers to create reusable, encapsulated custom elements - like your own HTML tags - that work natively across modern browsers without needing a framework.
-
-    They consist of 4 main technologies:
-    1. Custom Elements
-    - define your own HTML elements
-    - use class MyElement extends HTMLElement and customElements.define()
-    2. Shadow DOM
-    - provides encapsulation form styles and markup
-    - prevents styles from leaking in or out
-    - created using this.attachShadow({ mode: 'open' })
-    3. HTML Templates (<template>)
-    - define chunks of markup that aren't rendered until used
-    - paired with JS to clone and attach to the DOM
-    4. ES Modules
-    - import/export you rcomponents in a modular way
-    - enables reusability and lazy loading
-
-    Why to use Web Components?
-    - framework-agnostic (can be used in Angular, React, or plain HTML)
-    - encapsulated (styles and logic stay scoped)
-    - reusable & portable (build once, use anywhere)
-    - native to browser (no runtime or extra libraries required)
-    `,
-    category: 'General',
-  },
-  {
+  },{
     question: 'What are Angular PWA?',
     answer: `
     An Angular Progressive Web App is a web application built with Angular that uses modern browser features to behave like a native app - it can work offline, load instantly, and be installed on a user's device (mobile or desktop).
@@ -817,71 +512,7 @@ export const FLASHCARDS: FlashcardData[] = [
     Must be served over HTTPS for security.
     `,
     category: 'Angular',
-  },
-  {
-    question: 'What are core JS Collections?',
-    answer: `
-    1. Map
-    - Map allows keys of any type (including objects, functions)
-    - Maintains insertion order
-    - has .size, .set, .get, .has, .delete
-    - better for frequent additions/removals
-    2. Set
-    - A collection of unique values (no duplicates)
-    - Has .add, .has, .delete, .clear
-    - Great for deduplication, caching, filtering
-    3. WeakMap
-    - Keys must be objects
-    - Keys are weakly held (not preventable from garbage collection)
-    - No size or iteration (non-enumerable)
-    - Use: memory-safe stsorage for private data tied to DOM nodes or class instances
-    4. WeakSet
-    - Like Set but only for objects
-    - non-enumerable, weakly held
-    `,
-    category: 'JavaScript',
-  },
-  {
-    question: 'How to optimize frontend on low-level?',
-    answer: `
-    1. Avoid Reflows/Repaints
-    - Use requestAnimationFrame for animations
-    - Batch DOM reads and writes
-    - Minimize layout thrashing (e.g. reading offsetHeight followed by a DOM write)
-    2. Efficient Data Structures
-    - Use Map/Set for faster lookups than arrays
-    - Debounce or throttle high-frequency events (e.g. resize, scroll, search)
-    3. Avoid memory leaks
-    - Clean up event listeners
-    - Unsubscribe from Observables (especially in Angular)
-    4. Use Web Workers (multi-threading)
-    - Offload heavy computation off the main thread
-    - Use postMessage() to cummunicate between worker and main thread
-    - Perfect for sorting, parsing, crunching large datasets
-    5. Lazy Load Modules, Images
-    - loading="lazy" for images
-    - Route-based code splitting in Angular
-    `,
-    category: 'General',
-  },
-  {
-    question: 'What is multi-threading in JS?',
-    answer: `
-    JavaScript is single-threaded, but:
-    1. Web Workers
-    - separate background thread
-    - cannot access DOM
-    - used for calculations, compression, parsing
-    2. Service Workers
-    - proxy layer between web app and network
-    - used for caching, offline support, push notifications
-    3. Atomics and SharedArrayBuffer
-    - true shared memory and synchronization between threads
-    - advanced use case like rendering, image processing
-    `,
-    category: 'JavaScript',
-  },
-  {
+  },{
     question:
       'What are Resolvers in Angular? User sees blank screen or loading every single time when we fetch data in ngOnInit().',
     answer: `
@@ -936,82 +567,16 @@ export const FLASHCARDS: FlashcardData[] = [
     4. Improved UX
     `,
     category: 'Angular',
-  },
-  {
+  },  {
     question:
       'What is Webpack? What is it for? Tree Shaking? Dependency Graph?',
     answer: `
-    Webpack is a module bundler. It takes multiple JavaScript files (and other assets) and bundles them into optimized files that browsers can understand. It starts from defined entry points, builds a dependency graph, handles imports/exports, and applies various optimizations.
+    Webpack is a category bundler. It takes multiple JavaScript files (and other assets) and bundles them into optimized files that browsers can understand. It starts from defined entry points, builds a dependency graph, handles imports/exports, and applies various optimizations.
 
-    The dependency graph is the structure Webpack builds by analyzing all modules and their imports. Starting from the entry point, it follows every import, forming a graph-like (tree-like) structure of the entire application. This graph allows Webpack to determine which modules are needed and how they are connected.
+    The dependency graph is the structure Webpack builds by analyzing all categorys and their imports. Starting from the entry point, it follows every import, forming a graph-like (tree-like) structure of the entire application. This graph allows Webpack to determine which categorys are needed and how they are connected.
 
-    One important optimization is tree shaking. Tree shaking removes unused exports from the final bundle. It only works with ES Modules (ESM) because their imports/exports are static — meaning Webpack can know exactly what is imported at build time. CommonJS (require) is dynamic (require() is a runtime function call), so Webpack cannot reliably detect unused code in that format.
+    One important optimization is tree shaking. Tree shaking removes unused exports from the final bundle. It only works with ES categorys (ESM) because their imports/exports are static — meaning Webpack can know exactly what is imported at build time. CommonJS (require) is dynamic (require() is a runtime function call), so Webpack cannot reliably detect unused code in that format.
     `,
-    category: 'WEB',
+    category: 'Programming',
   },
-  {
-    question: 'Ways of connecting JS to HTML?',
-    answer: `
-    There are three main ways to connect JavaScript to HTML:
-
-    1) INLINE SCRIPTING
-      - Using the "onclick", "onchange", etc. attributes directly on HTML elements.
-      - Example: <button onclick="alert('Hello')">Click me</button>
-      - Generally discouraged in modern development because it mixes structure and behavior.
-
-    2) INTERNAL SCRIPT (in the same HTML file)
-      - Adding a <script> block inside the HTML file.
-      - Example:
-        <script>
-          console.log('Hello from inline script');
-        </script>
-      - Useful for quick demos, but not scalable for larger apps.
-
-    3) EXTERNAL SCRIPT (recommended)
-      - Linking a separate .js file using the <script src="..."></script> tag.
-      - Example:
-        <script src="app.js"></script>
-      - Keeps code organized and maintainable.
-
-    ADDITIONAL NOTES
-    • <script> tags can be placed in <head> or at the bottom of <body>.
-    • Adding the "defer" attribute loads scripts in parallel but executes them after the HTML is parsed.
-    • Adding the "async" attribute loads scripts in parallel and executes them as soon as they finish, which may not preserve order.
-    • Modern best practice: put <script src="..." defer></script> before </body> for predictable and efficient loading.
-  `,
-    category: 'HTML/CSS',
-  },
-  {
-    question: 'What to use id or class selectors in HTML/CSS?',
-    answer: `
-    ID SELECTORS (#id)
-    • Represent a single unique element on the page.
-    • An ID should be used only once per page.
-    • In CSS, IDs have higher specificity than classes.
-    • In JavaScript, IDs are often used for direct element access (document.getElementById).
-    • Example: <div id="header"></div> → #header { color: red; }
-
-    CLASS SELECTORS (.class)
-    • Represent one or more elements that share the same style or behavior.
-    • Classes can be reused across multiple elements.
-    • They are more flexible and maintainable than IDs for styling.
-    • Example: <div class="card"></div> → .card { box-shadow: ...; }
-
-    BEST PRACTICE
-    • Use classes for styling and reusable patterns.
-    • Reserve IDs for unique elements that require specific targeting (e.g., JavaScript hooks, internal page anchors).
-    • Avoid overusing IDs in CSS because they increase specificity and can make overriding styles harder.
-  `,
-    category: 'HTML/CSS',
-  },
-  // {
-  //   question: '',
-  //   answer: ``,
-  //   category: '',
-  // },
-  // {
-  //   question: '',
-  //   answer: ``,
-  //   category: '',
-  // },
 ];

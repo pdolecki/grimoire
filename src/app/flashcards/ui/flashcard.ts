@@ -1,10 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  input,
-  signal,
-} from '@angular/core';
-import { FlashcardData } from '../interfaces/flashcard-data';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FlashcardData } from '../models/flashcard-data';
 import { Badge } from '../../shared/ui/badge';
 
 @Component({
@@ -13,7 +8,9 @@ import { Badge } from '../../shared/ui/badge';
   imports: [Badge],
   template: `
     <article class="flashcard">
-      <app-badge [label]="flashcard().category"></app-badge>
+      @for (category of flashcard().categories; track $index) {
+      <app-badge [label]="category"></app-badge>
+      }
 
       <h2 class="flashcard__question">
         {{ flashcard().question }}

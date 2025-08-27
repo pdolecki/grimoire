@@ -241,7 +241,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     They are based on Signals, uses builder-based API (createFormGroup, FormControl). They feel more reactive and declarative, they are fully integrated with Signals ecostystem and fine-grained reactivity.
     `,
     category: 'Angular',
-  },{
+  },
+  {
     question:
       'What are the most common tests in Angular? What are the best testing practices?',
     answer: `
@@ -258,7 +259,7 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     `,
     category: 'Angular',
   },
-   {
+  {
     question: 'What are Promises, Observables and Subjects?',
     answer: `
     Promise - represents a single future value from an asynchronous operation (e.g. HTTP call, file read). Key features:
@@ -282,7 +283,6 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     - ReplaySubject (replays past values to new subscribers)
     - AsyncSubject (only emits the last value on completion)
     `,
-
     category: 'Angular',
   },
   {
@@ -310,7 +310,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     2. Interceptor - transparent, affects all HTTP calls
     `,
     category: 'Angular',
-  },  {
+  },
+  {
     question:
       'If we have in Angular service provided in root, but we add it to the providers array of standalone component - will it be the same instance as globally or a new one? Will it survive if the component gets destroyed?',
     answer: `
@@ -319,7 +320,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     `,
 
     category: 'Angular',
-  }, {
+  },
+  {
     question: 'What is @defer in Angular?',
     answer: `
     @defer is a block-based syntax that lets you lazy-load parts of the UI only when needed, without extra routing or manual logic.
@@ -431,7 +433,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     - delay(ms) - delays each emission
     `,
     category: 'Angular',
-  },  {
+  },
+  {
     question:
       'You have a search field above a data table. Every time user types, it triggers a backend API call. There are too many requests. How would you handle this problem in Angular?',
     answer: `
@@ -494,7 +497,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     - consider auto-save logic with explicity Save button
     `,
     category: 'Angular',
-  },{
+  },
+  {
     question: 'What are Angular PWA?',
     answer: `
     An Angular Progressive Web App is a web application built with Angular that uses modern browser features to behave like a native app - it can work offline, load instantly, and be installed on a user's device (mobile or desktop).
@@ -512,7 +516,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     Must be served over HTTPS for security.
     `,
     category: 'Angular',
-  },{
+  },
+  {
     question:
       'What are Resolvers in Angular? User sees blank screen or loading every single time when we fetch data in ngOnInit().',
     answer: `
@@ -567,7 +572,8 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     4. Improved UX
     `,
     category: 'Angular',
-  },  {
+  },
+  {
     question:
       'What is Webpack? What is it for? Tree Shaking? Dependency Graph?',
     answer: `

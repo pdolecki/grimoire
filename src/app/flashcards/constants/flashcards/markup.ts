@@ -2,32 +2,37 @@ import { FlashcardData } from '../../models/flashcard-data';
 
 export const FLASHCARDS_MARKUP: FlashcardData[] = [
   {
-    question: 'What is a difference between span and div in HTML?',
+    question: 'What is a difference between <div> and <span> in HTML?',
     answer: `
-    div
-    Used to group blocks of content, starts on a new line.
-    Default - display: block, block-level, for layout and structure
+    <div>
+    - block level element (starts on a new line)
+    - used to group larger sections or blocks of content
 
-    span
-    Used to style or group inline text, without breaking the flow.
-    Default - display: inline, inline-level, for styling inline text
+    <span>
+    - inline element (flows within thext)
+    - used to style or group small pieces of text without breaking layout
     `,
     category: 'Markup',
   },
   {
-    question: 'How to center a div conent?',
+    question: 'How can you center content inside a <div>?',
     answer: `
-    margin: 0 auto; // width needs to bet
+    Block centering (horizontal only):
+    maring: 0 auto;
 
+    Flexbox:
     display: flex;
     justify-content: center;  // horizontal
     align-items: center;  // vertical
 
+    Grid:
     display: grid;
     place-items: center;
 
+    Text aligment (inline elements):
     text-align: center; // works for inline elements
 
+    Absolute:
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,114 +40,123 @@ export const FLASHCARDS_MARKUP: FlashcardData[] = [
     `,
     category: 'Markup',
   },
-
   {
-    question: 'What we get from using SCSS?',
+    question: 'What do we gain from using SCSS?',
     answer: `
-    Reusable Variables
-    Declared on root level with $ prefix - e.g. $primary-color: #333; we later on use just background-color: $primary-color;
+    Variables
+    Reusables values for colors, fonts, spacing, etc.
+    Example: 
+    $primary: #333 -> color: $primary
 
-    Nesting CSS selectors
-    Provides us with cleaner structure matching our HTML.
+    Nesting
+    Cleaner, more structured selectors that mirror the HTML.
 
-    Mixins & Functions
-    Creating Reusable style logic without duplication. Simple example
-    @mixin flex-center {..style for flex-center}
+    Mixins and Functions
+    Reusable style logic without duplication.
+    Example:
+    @mixin flex-center { display: flex; justify-content: center; align-items: center }
     .card { @include flex-center; }
 
-    Inheritance (mixins are better)
-    We can share base styles accross classes, simple example
-    %base-button {..styles}
-    .btn-primary { @extend %base-button }
+    Inheritance
+    Share base styles across calsses using @extend.
+    Example:
+    %base-button { padding: 8px; border-radius: 4px; }
+    .btn-primary { @extend %base-button; }
     `,
     category: 'Markup',
   },
-    {
-    question: 'What is DOM?',
+  {
+    question: 'What is the DOM?',
     answer: `
-    Document Object Model is a programming interface that represents the structure of a web page as a tree of nodes (elements, attributes, text, etc.).
-    When the browser loads HTML, it parses it and buils the DOM - where each HTML tag becomes a node in a tree-like structure.
-    This structure lets JS interact with page:
-    - read or modify content (element.textContent, element.innerHtml)
-    - change styles (element.style)
-    - handle events (element.addEventListener)
+    Document Object Model
+    It is a programming interface that represents an HTML or XML document as a tree of nodes (elements, attributes, text, etc.).
+    When the browser loads HTML, it parses it into a DOM tree, where each tag becomes a node. This allows JavaScript to interact with the page:
+    - read or modify content
+    - change styles
+    - handle events
 
-    In Angular we rarly manipulate the DOM directly, instead we use Angular own abstarction (Renderer, ViewRef, etc.) and handle DOM updates efficiently through change detection.
+    The DOM acts as the bridge between static markup and dynamic scripts.
     `,
     category: 'Markup',
-  },{
-    question: 'How to optimize frontend on low-level?',
+  },
+  {
+    question: 'How to optimize frontend on low level?',
     answer: `
-    1. Avoid Reflows/Repaints
-    - Use requestAnimationFrame for animations
-    - Batch DOM reads and writes
-    - Minimize layout thrashing (e.g. reading offsetHeight followed by a DOM write)
-    2. Efficient Data Structures
-    - Use Map/Set for faster lookups than arrays
-    - Debounce or throttle high-frequency events (e.g. resize, scroll, search)
-    3. Avoid memory leaks
-    - Clean up event listeners
-    - Unsubscribe from Observables (especially in Angular)
-    4. Use Web Workers (multi-threading)
-    - Offload heavy computation off the main thread
-    - Use postMessage() to cummunicate between worker and main thread
-    - Perfect for sorting, parsing, crunching large datasets
-    5. Lazy Load categorys, Images
-    - loading="lazy" for images
-    - Route-based code splitting in Angular
+    Minimize Reflows & Repaints
+    - Use requestAnimationFrame for animations (instead of setTimeout/setInterval)
+    - Batch DOM reads/writes to avoid layout thrashing
+    - Avoid triggering synchronous style recalculations (e.g., accessing offsetHeight before changing styles)
+
+    Use Efficient Data Handling
+    - Prefer Map/Set over arrays for large collections with frequent lookups
+    - Debounce/throttle expensive events (scroll, resize, input)
+
+    Prevent Memory Leaks
+    - Always remove event listeners on unmount
+    - Unsubscribe from Observables or Streams (Angular, RxJS)
+    - Nullify references when objects are no longer needed
+
+    Offload Heavy Work
+    - Use Web Workers for CPU-heavy tasks (parsing JSON, sorting, data crunching)
+    - Communicate via postMessage() efficiently (avoid sending huge objects directly)
+    - Consider transferable objects (ArrayBuffer) for performance
+
+    Lazy Loading
+    - Use loading="lazy" for images and iframes
+    - Apply route/component-level code splitting in Angular
+    - Dynamically import heavy libraries only when needed
     `,
     category: 'Markup',
-  }, {
-    question: 'Ways of connecting JS to HTML?',
+  },
+  {
+    question: 'What are the ways to connect JavaScript to HTML?',
     answer: `
-    There are three main ways to connect JavaScript to HTML:
+    Inline (attributes on elements)
+    Example: 
+      <button onclick="alert('Hi')>Click</button>
+    Conclusion: 
+      Bad because Mixes HTML and JS, hard to maintain.
 
-    1) INLINE SCRIPTING
-      - Using the "onclick", "onchange", etc. attributes directly on HTML elements.
-      - Example: <button onclick="alert('Hello')">Click me</button>
-      - Generally discouraged in modern development because it mixes structure and behavior.
+    Internal (script tag inside HTML file)
+    Example: 
+      <script>
+        console.log('Hello');
+      </script>
+    Conclusion
+      Good for demos or very small pages, but not scallable.
 
-    2) INTERNAL SCRIPT (in the same HTML file)
-      - Adding a <script> block inside the HTML file.
-      - Example:
-        <script>
-          console.log('Hello from inline script');
-        </script>
-      - Useful for quick demos, but not scalable for larger apps.
+    External (separate JS file)
+    Example:
+      <script src="app.js"></script>
+    Conclusion:
+      Keeps code organized, resuable and maintainable.
 
-    3) EXTERNAL SCRIPT (recommended)
-      - Linking a separate .js file using the <script src="..."></script> tag.
-      - Example:
-        <script src="app.js"></script>
-      - Keeps code organized and maintainable.
-
-    ADDITIONAL NOTES
-    • <script> tags can be placed in <head> or at the bottom of <body>.
-    • Adding the "defer" attribute loads scripts in parallel but executes them after the HTML is parsed.
-    • Adding the "async" attribute loads scripts in parallel and executes them as soon as they finish, which may not preserve order.
-    • Modern best practice: put <script src="..." defer></script> before </body> for predictable and efficient loading.
+    Script loading notes:
+    - place script before </body> or use attributes
+    - defer -> downloads in parallel, runs after HTML is parsed (safe, preservs order)
+    - async -> donwloads in parallel, runs immediately when ready (may break order)
+    - Best practice: <script src="app.js" defer></script> near </body>
   `,
     category: 'Markup',
-  },{
-    question: 'What to use id or class selectors in HTML/CSS?',
+  },
+  {
+    question: 'When should you use id vs class selectors in HTML/CSS?',
     answer: `
-    ID SELECTORS (#id)
-    • Represent a single unique element on the page.
-    • An ID should be used only once per page.
-    • In CSS, IDs have higher specificity than classes.
-    • In JavaScript, IDs are often used for direct element access (document.getElementById).
-    • Example: <div id="header"></div> → #header { color: red; }
+    ID Selectors (#id)
+    - identify a single, unique element on the page
+    - should be unsed only once per page
+    - higher CSS specifity than classes
+    - common in JS (document.getElementById)
 
-    CLASS SELECTORS (.class)
-    • Represent one or more elements that share the same style or behavior.
-    • Classes can be reused across multiple elements.
-    • They are more flexible and maintainable than IDs for styling.
-    • Example: <div class="card"></div> → .card { box-shadow: ...; }
+    Class Selectors (.class)
+    - apply styles/behavior to multiple elements
+    - can be reused across elements (more flexible)
+    - prferred for styling and reusable patterns
 
-    BEST PRACTICE
-    • Use classes for styling and reusable patterns.
-    • Reserve IDs for unique elements that require specific targeting (e.g., JavaScript hooks, internal page anchors).
-    • Avoid overusing IDs in CSS because they increase specificity and can make overriding styles harder.
+    Best Practices:
+    - use classes for styling (scalable, reusable, easier to override)
+    - use IDs only for unique purposes (anchors, JS hooks)
+    - avoid using IDs for styling (complicate overrides due to specificity)
   `,
     category: 'Markup',
   },

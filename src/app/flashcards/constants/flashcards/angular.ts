@@ -581,20 +581,197 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     category: 'Angular',
   },
   {
-    question: 'What is Webpack? What are Tree Shaking and Dependency Graph?',
+    question: 'How would you avhieve a parent-child component communication?',
     answer: `
-    Webpack
-    - Module bundler: collects JS + assets into bundles for browser
+    Using input, output or shared service with a Subject or signal for communication.
 
-    Dependency Graph
-    - Map of all modules + imports
-    - Built from entry point, follows all imports
+    Custom two-way binding
+    When the child component has an input and an output with the same property name, but the output uses the Change suffix. This enables banana-in-a-box binding in the template. When the child emits a value it directly updates the parent property.
+    export class ChildComponent {
+      num = input<number>(0);
+      numChange = output<number>();
 
-    Tree Shaking
-    - Removes unused exports from bundle
-    - Works with ES modules (static imports/exports)
-    - Not reliable with CommonJS (dynamic require)
+      onNumChange(newNum: number) {
+        this.numChange.emit(newNum);
+      }
+    }
+    @Component({
+      imports: [ChildComponent],
+      template: '<app-child [(num)]="num" />',
+    })
+    export class ParentComponent {
+      num = signal(0);
+    }
+
+    Model inputs
+    That's the sytatic sugar over manual two-way binding. Instead of defining input and output and emitting manually you can use model(). It works both with signals and non signal properties passed. It is commonly used within custom form properties.
+    @Component({
+      ...
+      template: '<input [(ngModel)]=num" />'
+    })
+    export class ChildComponent {
+      num = model<number>(0);
+    }
+    @Component({
+      imports: [ChildComponent],
+      template: '<app-child [(num)]="num" />'
+    })
+    export class ParentComponent {
+      num = signal(0);
+    }
+
+    Control Value Accessor (CVA)
+    Perfect when the child component acts as a custom form control. Implementing ControlValueAccessor allows the component to integrate with Angular's forms APIs (both, reactive and template-driven).
+    Most people use it for creating resuable component in a UI library or when the child is for example custom serch and select component.
+    Imagine searching for goods in some shop webapp - when you type an item prefix it makes an API call, and then we have a dropdown of possible options.
     `,
-    category: 'Programming',
+    category: 'Angular',
   },
+  {
+    question:
+      'What is NgZone in Angular and when to go out of Angular change detection?',
+    answer: `
+    NgZone
+    It's a wrapper around JS event loop. It allows Angular to know when to trigger change detection. Angular patches async operations (like setTimeout, Promise etc.) using zone.js, so when those operations complete, change detection is runned automatically. It can lead to performance issues with high frequency code (e.g. scroll). In those cases we should NgZone.runOutsideAngular and manually re-enter with NgZone.run().
+    Good example might be simple user event tracker where there are global listeners on user events. They do not impact UI bindings, and the code runs in the background, therefore we should run it outside of change detection system. Another examples would be integrating with analytics, tracking or scripts that are passive (3rd party).
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What are Injection Tokens and why we use them?',
+    answer: `
+    Injection token
+    Is like a unique identifier or a name tag that Angular uses to locate and provide a specific value or service during dependency injection.
+    We usually use new InjectionToken when we provide a value that isn't a class (configuration objects, primitive values, interface-based dependency).
+
+    Example:
+    Running initialization logic at the app startup using the APP_INITIALIZER injection token token. While APP_INITIALIZER is  now depracated, recommended replacement is the provideAppInitializer function.
+    bootstrapApplication(App, {
+    providers: [
+      provideAppInitializer(() => {
+        // init languages
+        // get data from cookies
+        // setup sentry
+        // etc ...
+      }),
+    ],
+    });
+
+    We can also define custom injection tokens, commonly used when developing Angular libraries that require configuration from the consuming app. For instance, if your library calls API and needs to know which environment it should call - we can provide this value through a token:
+    // code in the library 
+    export const API_ENDPOINT = new InjectionToken<string>('API_ENDPOINT');
+    // in a different application/library
+    bootstrapApplication(AppComponent, {
+      providers: [
+        {
+          provide: API_ENDPOINT ,
+          useValue: '/prod/api'
+        },
+      ]
+    }
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What are resultion modifiers and why we use them?',
+    answer: `
+    Resolution Modifier
+    When injecting a service, Angular allows you to configure up to four resolution modifiers via the second argument to the inject() function. We rarely use them in day-to-day development, they tend to become important for building libraries or advanced directives (however, Angular itself uses them a lot and looking at its source code can clear things out a little).
+    private service = inject(SomeService, {
+      host: true,
+      optional: true,
+      self: true,
+      skipSelf: true
+    });
+
+    Optional()
+    We use it when provided service/injection token may or may not be provided by the developer (e.g. APP_INITIALIZER injection token). Angular during injection of this token uses inject(APP_INITIALIZER, {optional: true}), since developer can, but don't have to provide some exectuable code when angular initiates.
+
+    Self()
+    It makes Angular resolve the dependency only from the current injector (it won't check parent injectors). We use that mostly in directives that shoul donly operate on the element they're attachted to (e.g. adding an asterisk to input fields that are required). Use self when injecting NgControl, so it only pulls from the target element (angular uses self() internally in ReactiveFormsModule or FormsModule to resolve sync and async validators used on the form).
+    @Directive({
+      selector: 'input[formControlName], input[formControl]'
+    })
+    export class RequiredMarkerDirective {
+      private ngControl = inject(NgControl, {
+        optional: true,
+        self: true
+      })
+      constructor() {
+        if (this.ngControl?.control?.hasValidator(Validators.required)) {
+        // Add red asterisk
+        }
+      }
+    }
+
+    SkipSelf()
+    Opposite of self - it tells Angular to skip the current injector and look in the parent. We use that when a directive or component needs to interact with a container element, like a parent form. Example would be using FormControlName on reactive forms it tries to resolve the parent form name for the control.
+    @Directive({
+      selector: '[formControlName]',
+      providers: [controlNameBinding],
+      standalone: false,
+    })
+    export class FormControlName extends NgControl implements OnChanges, OnDestroy {
+      constructor(
+        @Optional() @Host() @SkipSelf() parent: ControlContainer,
+        // ... other injectors
+      )
+    }
+
+    @Host
+    It limits resolution to the host component or directive. It prevents Angular from searching up the hierarchy. Example would be if a directive inside FinalComponent tries to inject FormGroupDirective using @Host(). Angular will only look inside FinalComponent, not any parent components that may contain the actual form.
+    @Directive({
+      selector: '[appHostFormDirective]',
+    })
+    export class HostFormDirective {
+      private formGroup = inject(FormGroupDirective, { host: true })
+      
+      constructor() {
+          console.log('FormGroupDirective found:', formGroup);
+      }
+    }
+    @Component({
+      selector: 'app-final',
+      template: '
+        <form [formGroup]="form">
+          <input [formControlName]="'name'" appHostFormDirective />
+        </form>
+      ',
+      imports: [ReactiveFormsModule, HostFormDirective],
+    })
+    export class FinalComponent {
+      form = new FormGroup({
+        name: new FormControl<string | null>(null),
+      });
+    }
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What is and why we use track function in a for loop?',
+    answer: `
+    Track function
+    It is a performance optimization that was overlooked in the past, but new it is required to specify it in new control flow @for.
+
+    Why is it here?
+    Imagine having component making an API call to fetch a list of items and users and display them in the template. We can also have button which refetches this data (reload). With the old syntax (without track) we on every refetch triggered by button clicked, the array with data would be updated (even with the same content) and that would cause Angular to re-render all elements in the DOM. That's because it can't tell which items changed. We loose performance and have UI flickering, expecially for long and complex data lists. To prevent it we can use trackBy function and for example add function to handle identification:
+    identify(index: number, item: { id: string }): string | number {
+      return item.id;
+    }
+    That would tell Angular how to identify unique items in the array and how to associate each of them with corresponding DOM element (on data reload Angular will compare these keys and allow items that did not change to be preserved in the DOM).
+
+    Why is it important?
+    DOM operations are expensive, without proper tracking Angular will discard and recreate DOM elements for every item, even when the data was not changed.
+
+    Common mistakes with new syntax:
+    - using object itself as the key (;track item), because the reference to each item changes on every reload (even for identical data)
+    - using $index as the key (;track $index), it causes problems when the item is deleted
+    `,
+    category: 'Angular'
+  }
+  // {
+  //   question: '',
+  //   answer: ``,
+  //   category: 'Angular'
+  // }
 ];

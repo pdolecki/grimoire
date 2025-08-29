@@ -116,4 +116,86 @@ export const FLASHCARDS_PROGRAMMING: FlashcardData[] = [
     `,
     category: 'Programming',
   },
+  {
+    question: 'What does it mean to be a senior developer?',
+    answer: `
+    Be the change
+    - initiate and lead technical improvements
+    - address technical debt 
+    - learn to pitch ideas to higher ups
+
+    Think about product success
+    - push back on product or feature decisions (with respect) that may harm goals (immediatelly and in long-term)
+
+    Be open minded on you and others
+    - know how to give and receive feedback (e.g. code review)
+    - don't be afraid to google, ask a collegue or peer
+
+    Think in terms of team instead of you
+    - learn when to gather for brainstorming
+    - care about product and collabroate with product owners
+    `,
+    category: 'Programming',
+  },
+  {
+    question: 'Do you prefer declarative or imperative programming?',
+    answer: `
+    Declarative programming focuses on what needs to be done, while imperative programming focuses on how to do it.
+
+    Imperative programming involves mutating variables in multiple places, often with manual logic to track side effects
+
+    Declarative programming, involves defining a value or behavior in one place (e.g. through computed, signal or RxJS streams)
+
+    // Imperative Programming
+    export class ChildComponent {
+      private readonly featureService = inject(FeatureService);
+      private readonly apiService = inject(ApiService);
+
+      displayedData = signal<string[]>([]);
+
+      constructor {
+        this.apiService.existingData$.subscribe((data: string[]) => {
+          this.displayedData.set(data);
+        })
+        this.featureService.newData$.subscribe((data: string) => {
+          this.displayedData.update((current) => [...current, data]);
+        });
+      }
+    }
+
+    // Declarative Programming
+     export class ChildComponent {
+      private readonly featureService = inject(FeatureService);
+
+      displayedData = toSignal(
+        merge(this.apiService.existingData$, this.featureService.newData$).pipe(
+          scan((acc: string[], curr: string) => [...acc, curr], [] as string[])
+        ),
+        { initialValue: [] });
+    }
+    `,
+    category: 'Programming',
+  },
+  {
+    question: 'What is Webpack? What are Tree Shaking and Dependency Graph?',
+    answer: `
+    Webpack
+    - Module bundler: collects JS + assets into bundles for browser
+
+    Dependency Graph
+    - Map of all modules + imports
+    - Built from entry point, follows all imports
+
+    Tree Shaking
+    - Removes unused exports from bundle
+    - Works with ES modules (static imports/exports)
+    - Not reliable with CommonJS (dynamic require)
+    `,
+    category: 'Programming',
+  },
+  // {
+  //   question: '',
+  //   answer: ``,
+  //   category: 'Programming'
+  // }
 ];

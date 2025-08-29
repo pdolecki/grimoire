@@ -174,7 +174,8 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     - avoid side effects in services/modules (optimizer can eliminate them)
     `,
     category: 'JavaScript',
-  }, {
+  },
+  {
     question: 'How to build high-performance JavaScript app?',
     answer: `
     Measure and Keep Track
@@ -197,4 +198,9 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     `,
     category: 'JavaScript',
   },
+  // {
+  //   question: '',
+  //   answer: ``,
+  //   category: 'JavaScript'
+  // }
 ];

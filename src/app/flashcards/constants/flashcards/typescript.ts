@@ -16,4 +16,9 @@ export const FLASHCARDS_TYPESCRIPT: FlashcardData[] = [
     `,
     category: 'TypeScript',
   },
+  // {
+  //   question: '',
+  //   answer: ``,
+  //   category: 'TypeScript'
+  // }
 ];

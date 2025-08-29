@@ -4,29 +4,36 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
   {
     question: 'What is hoisting in JavaScript?',
     answer: `
-    Hoisting in JS means that variable and function declarations (not initializations) are moved to the top of their scope during compilation phase (before execution).
-    1. var:
-    - hoisted and initialized with undefined
-    - it can be referenced before declaration
-    2. let, const:
-    - hoisted, but placed in Temporal Dead Zone
-    - referencing before declaration throws a ReferenceError
-    3. function declarations:
-    - fully hoisted 
-    - can be called before their definition
-    4. function expression:
-    - treated like variables, only name is hoisted
-    - calling them early results in TypeError
+    Hosting in JS means that variable and function declarations (not initializations) are moved to the top of their scope during compilation phase (before execution).
+
+    var
+    Hoisted, initialized with undefined, can be referenced before declaration.
+
+    let, const
+    Hoisted, placed in Temporal Dead Zone, referencing before declaration trows a ReferenceError.
+
+    function declaration
+    Fully hoisted, can be called before their definition.
+
+    function expression
+    Treated like variables, only name is hoisted, calling them early results in TypeError.
     `,
     category: 'JavaScript',
   },
   {
-    question: 'What is clousure in JavaScript and how can it be useful?',
+    question: 'What is closure in JavaScript',
     answer: `
-    A clousure is a function that remembers the variables from the scope in which it was created. It applies even after the outer scope has finished execution.
-    Extra info:
-    - that is caused by JS functions forming a lexical closure (capture and retain access to their surrounding scope at the time of definition)
-    - in Angular we use that for creating private variables in services, building factory functions, managing callback state
+    Closure
+    Is when a function captures variables from its outer scope and keeps access to them even after the outer function has returned.
+    It is caused by JS functions forming a lexical closure - capture and retain access to their surrounding scope at the time of definition.
+
+    What do we use it for?
+    - private state (counters, configs, caches)
+    - event handlers (to remember a context)
+    - memoization utilities (reusing past values of functions for speed)
+
+    Angular
+    We use Closures for creating private variables in services, building factory functions, managing callback state.
     `,
     category: 'JavaScript',
   },
@@ -48,7 +55,8 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     The Event Loop keeps the JS engine resposive by coordinating when and how async callbacks are executed. It ensures microtasks (like Promises) run before macrotasks (like setTimeout).
     `,
     category: 'JavaScript',
-  },  {
+  },
+  {
     question: 'WEB Workers and Service Workers in Javascript?',
     answer: `
     A WEB Worker allows you to run JavaScript in a background thread, separate from the main UI thread. Use them to offload CPU-heavy tasks (like calculations, parsing large data, etc.) so your app doesn't freeze or become unresponsive.
@@ -64,7 +72,8 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     They have lifecycle of register > install > activate > fetch (events).
     `,
     category: 'JavaScript',
-  },  {
+  },
+  {
     question: 'What are Promises, how can you cancel a Promise in JavaScript?',
     answer: `
     Promise is a built-in JS object that represents the eventual completion (or failure) of an asynchronous operation. It has 3 states:
@@ -104,7 +113,8 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     Supports overloading, you can define multiple signatures.
     `,
     category: 'JavaScript',
-  },{
+  },
+  {
     question: 'What are core JS Collections?',
     answer: `
     1. Map
@@ -126,7 +136,8 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     - non-enumerable, weakly held
     `,
     category: 'JavaScript',
-  },{
+  },
+  {
     question: 'What is multi-threading in JS?',
     answer: `
     JavaScript is single-threaded, but:
@@ -140,6 +151,49 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     3. Atomics and SharedArrayBuffer
     - true shared memory and synchronization between threads
     - advanced use case like rendering, image processing
+    `,
+    category: 'JavaScript',
+  },
+  {
+    question: 'What is Dead Code in JavaScript? How to remove it?',
+    answer: `
+    Dead Code
+    It is a code, that either never exectues, is never referenced or which result is unused. 
+    We need to reduce it to achieve smaller bundles and cleaner code that is easier in maintanance.
+
+    How to remove it?
+    - use ES modules and named imports (enables tree-shaking)
+    - avoid exporting everything (CommonJS and barrel files)
+    - reduce work at import time (keep modules side-effect free)
+    - prefer small, pure functions, split code with dynamic imports, lazy load routes
+
+    Angular
+    - leverage build configurations (removes the dead code)
+    - tree-shakable providers (can be dropped if unused)
+    - lazy-load standalone routes/components (unused features never ship)
+    - avoid side effects in services/modules (optimizer can eliminate them)
+    `,
+    category: 'JavaScript',
+  }, {
+    question: 'How to build high-performance JavaScript app?',
+    answer: `
+    Measure and Keep Track
+    Use DevTools profiler, Web Vitals, watch for long tasks.
+
+    Ship less JS
+    Split code, use dynamic imports, lazy load routes, avoid side-effects, enable tree shaking.
+
+    Free the main thread
+    Use Web Workers for heavy CPU tasks, requestAnimationFrame for animations.
+
+    Create engine-friendly code
+    Define objects shapes at starts, batch DOM operations (reads/writes).
+
+    Handle async code
+    Async/await and AbortController for cancelling. Debounce/Throttle frequent events like scroll, resize, input.
+
+    Angular
+    Singals, OnPush, Zoneless, @for with track, @defer for less important UI, lazy load routes and feature components.
     `,
     category: 'JavaScript',
   },

@@ -767,8 +767,240 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     - using object itself as the key (;track item), because the reference to each item changes on every reload (even for identical data)
     - using $index as the key (;track $index), it causes problems when the item is deleted
     `,
-    category: 'Angular'
-  }
+    category: 'Angular',
+  },
+  {
+    question: 'What is the difference between providers and viewProviders?',
+    answer: `
+    providers
+    The service is available to the component itself, its template, any child components, and even to the content projected into it using <ng-content>.
+
+    viewProviders
+    Service visibility is limited to the component's view. That means it's accessible only to the component and the elements declared directly in its template, but not to projected content or external child components.
+
+    Both of those are rearely used, mostly in NgRX examples and generation of dynamic components with configurable dependencies.
+
+    Example:
+    Flight booking portal, final payment step you present to options to pay - Stripe as default and PayPal. User has ability to choose, each option has different implementation, both rely on a common PaymentService abstraction:
+    export abstract class PaymentService {
+      abstract pay(): void;
+    }
+
+    @Injectable()
+    export class StripeService implements PaymentService {
+      pay() { console.log('Paid with Stripe!'); }
+    }
+
+    @Injectable()
+    export class PaypalService implements PaymentService {
+      pay() { console.log('Paid with PayPal!'); }
+    }
+
+    @Component({
+      selector: 'app-payment-button',
+      template: '<button (click)="handlePayment()">Pay</button>',
+    })
+    export class PaymentButtonComponent {
+      private paymentService = inject(PaymentService);
+
+      handlePayment() {
+        this.paymentService.pay();
+      }
+    }
+    In the real life we would need to establish connection with payment provider, handle errors etc. The PaymentButtonComponent is using abstract PaymentService, which means, we need to provide an instance of either the Paypal or Stripe service.We can manually create and inject the appropriate provider to dynamically decide which implementation to use based on user selection. Demonstration of destorying and re-instantiating the component with different PaymentService provider each time:
+    @Component({
+      imports: [FormsModule],
+      template: ' 
+        <label>
+          <input type="checkbox" [(ngModel)]="usePaypal" /> Use PayPal
+        </label>
+
+        <ng-template #container />
+      '
+    })
+    export class TestComponent {
+      readonly usePaypal = signal(false);
+
+      readonly container = viewChild('container', {
+        read: ViewContainerRef
+      });
+
+      constructor() {
+        // init payment button
+        effect(() => {
+          const container = this.container();
+          const usePaypal = this.usePaypal();
+
+          untracked(() => {
+            if (container) {
+              this.loadComponent(container, usePaypal);
+            }
+          });
+        });
+      }
+
+      loadComponent(vcr: ViewContainerRef, usePaypal: boolean) {
+        // remove previous
+        vcr.clear();
+
+        const injector = Injector.create({
+          providers: [
+            {
+              provide: PaymentService,
+              useClass: usePaypal ? PaypalService : StripeService
+            }
+          ]
+        });
+
+        // attach component to DOM
+        vcr.createComponent(PaymentButtonComponent, { injector });
+      }
+    }
+    This exaples shows how providers can be dynamically configured depending on runtime logic. We don't use providedIn: 'root' here, even if our services were globally provided, because using Injector.create() always results in new instances, overriding any singleton behavior.
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'Why pipes are save in a template, but function calls (not signals) are not?',
+    answer: `
+    Pure pipes
+    They are only reevaluated when their input values change, which makes them efficient and safe to use in templates. 
+
+    Function calls
+    In templates they are executed on every change detection cycle.
+
+    Under the hood, pipes create a caching object, and for a specific input, they perform the pipe's logic and store the result in the cache. Then when change detection runs again with the same input, the pipe first checks the cache. If the output was already compute it simplly returns the cached value, making it an O(1) operation.
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'How would you convice team to migrate from Observables to signals?',
+    answer: `
+    I would simply tell the truth:
+    - angular, and the whole frontend is clearly moving towards signals
+    - there's even a TC39 proposal to support signals natively in JS
+    - most of Angular new APIs (e.g. ResourceAPI) are designed to work with signals
+    - signals simplify state management (they can both listen to changes and synchronously read their current value)
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'What is the diamond problem in Observbables and why there is none with signals?',
+    answer: `
+    Example focusing on cobineLatest operator:
+    We have effect that listens to two signals. Singals are synchronous and batched, meanging that if both signals are updated one after another, the effect will still run only once. However if we use combineLatest, it emits every time a dependency changes, resulting in multiple emissions even for the same update cycle.
+    export class TestComponent {
+      prop1 = signal('a');
+      prop2 = signal('b');
+
+      constructor() {
+        effect(() => {
+          const prop1 = this.prop1();
+          const prop2 = this.prop2();
+
+          console.log(\`Signal: \${prop1} - \${prop2}\`);
+        });
+
+        combineLatest([
+          toObservable(this.prop1), 
+          toObservable(this.prop2)]
+        ).subscribe(([p1, p2]) => console.log(\`Observable: \${[p1} - \${p2}\`));
+        
+        setTimeout(() => {
+          this.prop1.set('one');
+          this.prop2.set('two');
+        }, 1000);
+      }
+    We would see:
+    Signal: a - b
+    Observable: a - b
+    Signal: one - two
+    Observable: one - b
+    Observable: one - two
+    In the console output we see:
+    - the effect logs only once, after both values are updated
+    - the combineLatest logs twice, once for each individual update
+
+    This is example of the diamond problem - duplicated or excessive emissions due to shared dependencies in a reactive graph. Signals avoid this problem thanks to their synchronous and batched behavior.
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'When to use effect and untracked in a signal based application?',
+    answer: `
+    Effects
+    Use them whan we have no other alternative, e.g. when we need to rely on a reactive value and the other end isn't reactive (DOM API synchronizations, sending data into analytics, communication with a non-reactive library).
+
+    Untracked
+    This function is needed when we want to remove dependency tracking in an effect. Problems that occur many times are that an effect reading multiple singals and also modifying some, therefore it creates an infinite cycle and is running all the time. We can use untracked most of the time and leave only the dependency signals outside of it.
+    Example:
+    Let's focus on the input element when the button is clicked. Use afterRenderEffect which works similarly as effect, with key difference being that it runs after the application has completed rendering.
+    @Component({
+      selector: 'app-focus-example',
+      imports: [FormsModule],
+      changeDetection: ChangeDetectionStrategy.OnPush,
+      template: \`
+        <button (click)="editMode.set(!editMode())">
+          {{ editMode() ? 'Exit' : 'Enter' }} Edit Mode
+        </button>
+
+      <input #editInput [(ngModel)]="value" [disabled]="!editMode()" />
+      \`
+    })
+    export class FocusExampleComponent {
+      editMode = signal(false);
+      value = signal('Initial value');
+      editInput = viewChild('editInput', { read: ElementRef });
+
+      constructor() {
+        afterRenderEffect(() => {
+          const editMode = this.editMode();
+        
+          untracked(() => {
+            if (editMode ) {
+              // read the element reference once, without tracking it
+              const inputRef = this.editInput();
+              // defer the focus() until after the DOM is updated
+              setTimeout(() => {
+                inputRef?.nativeElement?.focus();
+              })
+            }
+          })
+        });
+      }
+    }
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'Do we need life-cycle hooks in a fully signal based app?',
+    answer: `
+    Many of life-cycle hooks can be replaced by signals and reactive primitives.
+
+    NgOnInit (NO)
+    Mostly replaceable with constructor or effect. This hook is traditionally used for init logic that depends on resolved inputs, data fetching, or setting up observers. For simpler logic, constructor is enough, while more complex reactive scenarios are better handled with effect().
+
+    NgOnChange (NO)
+    It can be replaced with computed or effect, as these can react to changes in input signal dependencies.
+
+    NgAfterViewInit (NO)
+    It can be replaced with effect to perform updates on DOM elements, using viewChild signal references as dependencies.
+
+    NgAfterContentInit (NO)
+    Similar to AfterViewInit, effect can handle init of logic based on contentChild signal references or we can use the afterNextRender callback.
+
+    NgAfterContentChecked/NgAfterViewChecked (NO)
+    They are called after every change detection cycle, so they are performance sensitive. We can replace them with afterRenderEffect wich runs after the view has been rendered and a signal dependency changed.
+
+    NgOnDestroy (NO)
+    For cleanup tasks such as unsubscribing from 3rd party libraries, clearing intervals, or other manual teardown logic that signnals don't automatically handle we can use inject DestroyRef and liston on onDestroy for this purpose.
+
+    `,
+    category: 'Angular',
+  },
   // {
   //   question: '',
   //   answer: ``,

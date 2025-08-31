@@ -1085,6 +1085,72 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     `,
     category: 'Angular',
   },
+  {
+    question:
+      'What is the difference between hot and cold Observables in RxJS?',
+    answer: `
+    Cold Observable
+    - starts producing values only when subscribed
+    - each subscriber gets its own independent stream
+    - Example: http.get() - new request per subscriber
+
+    Hot Observable
+    - produces values regardless of subscribers
+    - subscribers share the same source
+    - Example: DOM events, WebSocket, Subject
+
+    Analogy:
+    - Cold = movie on demand (everyone starts from the beginning)
+    - Hot = live stream (you join in the middle)
+    `,
+    category: 'Angular',
+  },
+  // {
+  //   question:
+  //     'Describe a time that you had to refactor legacy code in Angular, how did you approach it?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question:
+  //     'How do you handle code scalability and performance in large Angular apps?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question: 'What is OnPush change detection and when would you use it?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question:
+  //     'What is the difference between combineLatest, withLatestFrom, and forkJoin and how would you decide on which one to use?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question:
+  //     'What is your approach to testing, what mocking library do you use?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question:
+  //     'How would you migrate an existing app to standalone components and Signals gradually?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question: 'What is hydration, how you enable it, why is it needed?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
+  // {
+  //   question:
+  //     'What is some more complex feature you have worked on in the past 1-2 years? What was the problem and how did you solve it?',
+  //   answer: ``,
+  //   category: 'Angular',
+  // },
   // {
   //   question: '',
   //   answer: ``,

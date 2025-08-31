@@ -997,6 +997,90 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
 
     NgOnDestroy (NO)
     For cleanup tasks such as unsubscribing from 3rd party libraries, clearing intervals, or other manual teardown logic that signnals don't automatically handle we can use inject DestroyRef and liston on onDestroy for this purpose.
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What is a higher-order observable and how they differ?',
+    answer: `
+    Classic search box use case, where on each keystroke, an API request is made. 
+    export class TestComponent {
+      private readonly http = inject(HttpClient);
+      readonly control = new FormControl<string>('');
+      
+      search$ = this.control.valueChanges.pipe(
+        // switchMap, concatMap, mergeMap, exhaustMap
+        switchMap((val) => this.http.get('...', {
+          val: val
+        }))
+      )
+    }
+
+    switchMap
+    Cancels any ongoing request when a new value is typed. Ideal for search boxes, only the input matters.
+
+    mergeMap
+    Triggers all requests in parallel. Every keystroke results in a request, regardless of timing. Good for logging, but not ideal for searches.
+
+    concatMap 
+    Queues each request and processes them sequentially, preserving order. Better for form submission flows, not live search.
+
+    exhaustMap 
+    Ignores new values while a request is in progress. Useful to prevent duplicate requests (e.g. during button mashing), but bad for fast-typing search boxes. If you don't use the abortSignal for the resource API, it works as exhaustMap.
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'Difference between share() and shareReplay()',
+    answer: `
+    Both share and shareReplay are RxJS multicasting operators. They allow multiple subscribers to share the same source observable, preventing duplicated side effects (like HTTP requests).
+
+    share()
+    Use when you only want future subscribers to receive emissions. It doesn't retain or replay past values. Essentially, it converts a cold observable into a hot one.
+
+    shareReplay()
+    Use when you want new subscribers to immediately receive the latest emitted value(s). It's useful for caching scenarios where re-executing the source (e.g. HTTP request) is costly or undesirable.
+    You can configure shareReplay using:
+    - bufferSize, the number of previous values to remember and replay to new subscribers. Typ9ically set to 1 for simple caching.
+    - refCount, when true, the observable automatically unsubscribes from the source when there are no subscribers. When false, it stays connected indefinitely (useful for shared streams).
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What does scan() + expand() do?',
+    answer: `
+    Both of them are rarely used in everyday development. Their presence can indicate that you've encountered more complex problem, the one that goes beyond the usueal use of map, filter, or take operators.
+      private paginationOffset$ = new Subject<number>();
+   
+      loadedMessages = toSignal(this.paginationOffset$.pipe(
+        startWith(0),
+        exhaustMap((offset) =>
+          this.api.getMessages(offset).pipe(
+            expand((_, i) => 
+              (i < 2 ? this.api.getMessages(offset + 20) : EMPTY)
+          ),
+            map((data) => ({ data })),
+            catchError((err) => of({ data: [] })),
+            startWith({ data: [] }),
+          ),
+        ),
+        scan(
+          (acc, curr) => ({ data: [...acc.data, ...curr.data] }),
+          { data: [] as MessageChat[] },
+        ),
+      ), {initialValue: [] });
+      
+      nextScroll() {
+        this.paginationOffset$.next(this.loadedMessages().data.length);
+      }
+
+
+      This code represents a recursive API baased pagination pattern. Every time the user triggers nextScroll() (e.g. clicking Load More button), the number of already loaded messages is emitted into the paginationOffset$ subject. Inside the loadedMessages signal:
+      - exhaustMap ignores new emissions until the current inner observable completes. The user is unable to load more data until the first batch completes.
+      - expand is used to recursively call the API multiple times. We assume each call returns 20 messages. Using expand, we can simulate loading three pages in one shot (initial call + two recursive ones).
+      - scan accumulates all the loaded messages into one stream without losing previously fetched ones.
+      - catchError ensures that any failed API call doesn't break the chain.
+      - startWith ensures the stream emits an initial empty state, avoiding undefined refereneces.
 
     `,
     category: 'Angular',

@@ -144,7 +144,7 @@ export const FLASHCARDS_PROGRAMMING: FlashcardData[] = [
 
     Imperative programming involves mutating variables in multiple places, often with manual logic to track side effects
 
-    Declarative programming, involves defining a value or behavior in one place (e.g. through computed, signal or RxJS streams)
+    Declarative programming, involves defining a value or behavior in one place (e.g. through computed, signal or RxJS streams) - in simple terms, with declarative code you can understand what something is and how it changes just by looking at its declaration.
 
     // Imperative Programming
     export class ChildComponent {

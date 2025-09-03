@@ -1105,52 +1105,163 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     `,
     category: 'Angular',
   },
-  // {
-  //   question:
-  //     'Describe a time that you had to refactor legacy code in Angular, how did you approach it?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question:
-  //     'How do you handle code scalability and performance in large Angular apps?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question: 'What is OnPush change detection and when would you use it?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question:
-  //     'What is the difference between combineLatest, withLatestFrom, and forkJoin and how would you decide on which one to use?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question:
-  //     'What is your approach to testing, what mocking library do you use?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question:
-  //     'How would you migrate an existing app to standalone components and Signals gradually?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question: 'What is hydration, how you enable it, why is it needed?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
-  // {
-  //   question:
-  //     'What is some more complex feature you have worked on in the past 1-2 years? What was the problem and how did you solve it?',
-  //   answer: ``,
-  //   category: 'Angular',
-  // },
+  {
+    question:
+      'Describe a time that you had to refactor legacy code in Angular, how did you approach it?',
+    answer: `
+    First I analyzed the code to identify pain points:
+    - duplicated logic
+    - unclear structure
+    - missing typings
+
+    I added unit tests around critical parts to ensure I didn't break functionality during refactor.
+
+    Then I refactored incrementally:
+    - moved shared logic into services
+    - replaced ddepracted APIs with modern Angular features
+    - introduced strict typing and lint rules
+    - optimized change detection and async handling
+
+    After each step, I ran tests and verified behavior manually.
+
+    This way I improved redability, performance, and maintainability without a big-bang rewrite.
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'How do you handle code scalability and performance in large Angular apps?',
+    answer: `
+    - Use feature-based architecture (standalone components, shared libs)
+    - Manage state with Signals, ComponentStore, or NgRx for complex flows
+    - Apply ChangeDetectionStrategy.OnPush and trackBy for lists
+    - Lazy-load routes, split bundles, analyze bundle size
+    - Optimize RxJS: switchMap, debounce, unsubscribe with takeUntilDestroyed
+    - Compress assets, use WebP/SVG, and cache with CDN
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What is OnPush change detection and when would you use it?',
+    answer: `
+    OnPush tells Angular to check a component only when:
+    - an input changes by reference
+    - an observable/signal emits
+    - you trigger change detection manually
+    
+    This skips unnecessary checks and boosts performance.
+
+    Use it for:
+    - components with immutable inputs
+    - data driven by signals or RxJS
+    - large apps where default change detection is too costly
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'What is the difference between combineLatest, withLatestFrom, and forkJoin and how would you decide on which one to use?',
+    answer: `
+    combineLatest
+    - emits whenever any source emits (after each has emitted once)
+    - output = latest value from each source
+    - use for live UIs where all streams can update continously
+    - Example: combineLatest([search$, filters$, sort$])
+
+    withLatestFrom
+    - emits only when the source emits; "samples" latest from others
+    - use when one stream is the trigger (e.g. click$) and you need current state
+    - Example: click$.pipe(withLatestFrom(formState$))
+
+    forkJoin
+    - waits for all sources to complete, then emits once and completes
+    - use for parallel one-off tasks (e.g. multiple HTTP calls at init)
+    - Example: forkJoin([getUser$, getPosts$, getPrefs$])
+
+    How to choose?
+    - need coninouse updates from all (combineLatest)
+    - one stream is the trigger, others are context (withLatestFrom)
+    - one-off result after all complete (HTTP, files) (forkJoin)
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'What is your approach to testing, what mocking library do you use?',
+    answer: `
+    My approach:
+    - unit tests for components, services and pipes
+    - integration tests for how pieces work together
+    - E2E tests for full user flows (Cypress, Playwright)
+
+    Best practices:
+    - test behavior, not implementation details
+    - keep unit tests fast and isolated
+    - don't test Angular itself or 3rd party libraries
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'How would you migrate an existing app to standalone components and Signals gradually?',
+    answer: `
+    - Start with bootstrap: switch to bootstrapApplication with importProvidersForm(AppModule)
+    - Convert leaf components first using standalone: true, then containers
+    - Move routing to provideRouter with loadComponent/lazy routes
+    - Introduce Signals for local UI state first (via toSignal/computed/effect)
+    - Keep RxJS for streams, migrate UI state gradually
+    - Remove NgModules only after a full feature is standalone
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What is hydration, how you enable it, why is it needed?',
+    answer: `
+    Hydration is the process of taking server-rendered HTML (SSR) and attaching Angular's client-side logic to it instead of re-rendering the page from scratch.
+
+    How to enable:
+    - In main.ts use provideClientHydration() when bootstrapping
+    - Requires Angular Universal for server-side rendering
+
+    Why needed:
+    - Faster startup, because HTML is already rendered
+    - Better SEO and social sharing (content available before JS runs)
+    - Improves perceived performance and Core Web Vitals
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'What is a more complex feature you built in the last 1–2 years? What was the problem and how did you solve it?',
+    answer: `
+    Context
+    - Real-time portfolio/analytics page: 50k+ rows, live price feeds, heavy filters, export, SEO.
+
+    Problem
+    - UI jank (main thread blocked), huge bundle, duplicate network calls, poor LCP/INP.
+
+    Approach
+    - Architecture: split into feature modules → migrated to standalone components incrementally.
+    - State: local UI state with Signals (signal/computed/effect); cross-feature with SignalStore.
+    - Rendering: OnPush-style patterns, @for with track, virtual scroll (CDK) for large lists.
+    - Data: cache & share HTTP with shareReplay(1); dedupe calls; AbortController for cancellations.
+    - Performance: move CPU-heavy parsing/aggregation to a Web Worker; batch DOM reads/writes.
+    - Loading: route-level code-splitting, lazy load charts; @defer for non-critical widgets.
+    - SSR/Hydration: Angular Universal + provideClientHydration() to boost startup & SEO.
+    - Observability: Web Vitals + Performance marks; budget + bundle analyzer in CI.
+
+    Result (before → after)
+    - LCP: ~3.8s → ~1.6s, INP: ~260ms → ~90ms
+    - Bundle (initial): ~900KB → ~420KB
+    - Dropped long tasks >50ms by ~70%
+    - Zero duplicate fetches; smooth 60fps scroll on large grids.
+
+    Key takeaways
+    - Signals for fine-grained updates, workers for heavy compute, and lazy/hydration for fast startup.
+    `,
+    category: 'Angular',
+  },
+
   // {
   //   question: '',
   //   answer: ``,

@@ -16,6 +16,28 @@ export const FLASHCARDS_TYPESCRIPT: FlashcardData[] = [
     `,
     category: 'TypeScript',
   },
+  {
+    question:
+      'What are user-defined type guards in TypeScript and how is "is" used?',
+    answer: `
+    User-defined type guards
+    Functions that help TypeScript narrow a type at runtime.
+
+    The "is" operator in the return type tells the compiler:
+    - if the function returns true, the argument is of the specified type
+    - it allows safe narrowing inside conditionals
+    - Example:
+    function isCat(pet: Animal): pet is Cat {
+      return (pet as Cat).meow !== undefined;
+    }
+
+    if (isCat(animal)) {
+      // here "animal" is inferred as Cat
+      animal.meow();
+    }
+    `,
+    category: 'TypeScript',
+  },
   // {
   //   question: '',
   //   answer: ``,

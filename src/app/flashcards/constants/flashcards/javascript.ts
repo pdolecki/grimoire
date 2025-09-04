@@ -198,6 +198,68 @@ export const FLASHCARDS_JAVASCRIPT: FlashcardData[] = [
     `,
     category: 'JavaScript',
   },
+  {
+    question:
+      'How does the "this" keyword behave in arrow functions vs normal functions?',
+    answer: `
+    Arrow functions
+    - no own "this"
+    - inherit "this" from surrounding scope (lexical)
+    - cannot be changed with call/apply/bind
+
+    Normal functions
+    - "this" depends on how they are called (dynamic)
+    - can be changed with call/apply/bind
+    - can be used as constructors (arrow functions cannot)
+    `,
+    category: 'JavaScript',
+  },
+  {
+    question:
+      'Which of the APIs allows us to add functions to queue of microtasks?',
+    answer: `
+    APIs that schedule microtasks:
+    - Promise.resolve().then(...)
+    - queueMicrotask(...)
+    - MutationObserver callback
+
+    All of these add functions to the microtask queue (run after the current task, before the next macrotask).
+    `,
+    category: 'JavaScript',
+  },
+  {
+    question:
+      'Which of the APIs allows us to add functions to queue of macrotasks?',
+    answer: `
+    APIs that schedule macrotasks:
+    - setTimeout(...)
+    - setInterval(...)
+    - setImmediate(...) (Node.js)
+    - I/O callbacks
+    - postMessage(...)
+
+    All of these add functions to the macrotask queue (exectued after microtasks have been processed).
+    `,
+    category: 'JavaScript',
+  },
+  {
+    question:
+      'What is the difference between microtasks and macrotasks in JavaScript?',
+    answer: `
+    Microtasks
+    - run immediately after the current call stack, before any macrotask
+    - Examples: Promise.then, queueMicrotask, MutationObserver
+
+    Macrotasks
+    - run after microtasks are cleared, in the event loop cycle
+    - Examples: setTimout, setInterval, setImmediate (Node.js), I/O, postMessagee
+
+    Summary
+    - microtasks, high priority, always exectued first
+    - macrotasks, scheduled later, one per event loop tick
+    `,
+    category: 'JavaScript',
+  },
   // {
   //   question: '',
   //   answer: ``,

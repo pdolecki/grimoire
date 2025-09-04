@@ -1261,7 +1261,71 @@ export const FLASHCARDS_ANGULAR: FlashcardData[] = [
     `,
     category: 'Angular',
   },
+  {
+    question:
+      'In Angular, how do providers, viewProviders, and the injector hierarchy affect service availability?',
+    answer: `
+    providers
+    - registered in a component, available in component view and in projected content
+    - good for overriding service instances for component + children
 
+    viewProviders
+    - registered only for the component's view (its own template)
+    - not visible to content passed via ng-content (content projection)
+
+    root-level providers
+    - declared with providedIn: 'root'
+    - available as a singleton across the whole app
+
+    hierarchical injectors
+    - each component gets its own injector
+    - child injectors can shadow or override parent providers
+    - useful for creating different instances of the same service in different parts of the app
+    `,
+    category: 'Angular',
+  },
+  {
+    question:
+      'In RxJS, how can you prevent multiple executions of the same HTTP request when mutliple subscribers are involved?',
+    answer: `
+    By default, each subscription to an Observable (like HttpClient.get) triggers a new execution (multiple HTTP calls). To solve that we use multicasting operators to share one exectuion among all subscribers.
+
+    Common operators
+    - share(), turns the source into a hot observable, shares one subscription
+    - shareReplay(n), same as share, but also replays last n values to late subscribers
+    - publish().refCount(), older way, now replaced by share
+
+    Example:
+    this.data$ = this.http.get('/api/users').pipe(shareReplay(1));
+    // Now all subscribers reuse the same HTTP response
+    `,
+    category: 'Angular',
+  },
+  {
+    question: 'What is Angular Ivy, and how to do TView and LView fit into it?',
+    answer: `
+    Angular Ivy
+    - rendering and compilation engine introduced in Angular 9
+    - replaced the older View Engine
+    - designed for smaller boundels, faster builds, better tree-shaking
+
+    TView
+    - static template metadata, created at compile time
+    - contains render instructions and binding slots
+    - immutable during runtime
+
+    LView
+    - dynamic instance created at runtime
+    - holds actual DOM references, component state, data values
+    - changes as the app runs
+
+    Summary
+    - Ivy = new engine (compilation + rendering)
+    - TView = static blueprint
+    - LView = live instance of a view
+    `,
+    category: 'Angular',
+  },
   // {
   //   question: '',
   //   answer: ``,

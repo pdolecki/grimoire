@@ -193,6 +193,70 @@ export const FLASHCARDS_PROGRAMMING: FlashcardData[] = [
     `,
     category: 'Programming',
   },
+  {
+    question:
+      'What are and what are differences between LocalStorage, SessionStorage and Cookies?',
+    answer: `
+    LocalStorage
+    - key-value storage in browser
+    - persists with no expiry (unitl manually cleared)
+    - accessible only via JS
+    - not sent with HTTP requests
+    - Example: save theme, language, or user preferences
+
+    SessionStorage
+    - key-value storage in browser
+    - lives only for the duration of the tab/session
+    - cleared when the tab is closed
+    - not sent with HTTP requests
+    - Example: hold wizard step, temporary form data, filters
+
+    Cookies
+    - small pieces of data stored by the browser
+    - can have expiry dates
+    - sent automatically with every HTTP request (good for auth, but adds overhead)
+    - accessible from both client (JS) and server
+    - Example: JWT/auth tokens, remember-me sessions, CSRF tokens
+    `,
+    category: 'Programming',
+  },
+  {
+    question: 'What is WCAG and what are its key principles?',
+    answer: `
+    WCAG = Web Content Accessibility Guidelines
+    - international standard for web accessibility
+    - versions 2.0 (2008), 2.1 (2018), 2.2 (2023)
+
+    Key principles (POUR):
+    - Perceivable, content needs to be visible & audible
+    - Operable, all controls usable by keyboard etc.
+    - Understandable, clear, consistent, predictable
+    - Robust, works with assistive technologies
+
+    Goal
+    Make content accessible to people with disablilities.
+
+    WCAG 2.1
+    - contrast 4.5:1 for normal text, 3:1 for large text, 7:1 for AAA compliance
+    - all functionality available from keyboard
+    - provide alt text for images and not-text content
+    - content works with assistive technologies
+    - responsive layout, semantic HTML, ARIA when needed
+
+    WCAG 2.2
+    Builds on 2.1 with new success criteria:
+    - focus apperance (visible focus indicator)
+    - dragging movements (must have simple alternative)
+    - target size (interactive targets at least 24x24px)
+    - accessible authentication (no cognitive test only, e.g. no puzzles)
+
+    WCAG 2.1 focused on mobile, low vision and cognitive needs.
+    WCAG 2.2 extends this, improving usability and accessibility.
+
+    `,
+    category: 'Programming',
+  },
+
   // {
   //   question: '',
   //   answer: ``,

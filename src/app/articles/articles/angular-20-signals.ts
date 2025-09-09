@@ -8,7 +8,7 @@ import { Article } from '../ui/article';
     <app-article
       title="Angular 20: Pragmatic Signals Everywhere"
       description="A field guide to adopting signals in real code without rewriting the world."
-      [tags]="['Angular']"
+      [tag]="'Angular'"
       cover="/articles/angular-20-signals.png"
     >
       <h2>What are Signals?</h2>

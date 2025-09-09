@@ -15,9 +15,7 @@ import { Badge } from '../../shared/ui/badge';
   template: `
     <section class="article">
       <div class="article__tags">
-        @for (tag of tags(); track $index) {
-        <app-badge [label]="tag"></app-badge>
-        }
+        <app-badge [label]="tag()"></app-badge>
       </div>
 
       <img [src]="cover()" class="article__cover" />
@@ -65,5 +63,5 @@ export class Article {
   readonly cover = input.required<string>();
   readonly title = input.required<string>();
   readonly description = input.required<string>();
-  readonly tags = input.required<string[]>();
+  readonly tag = input.required<string>();
 }

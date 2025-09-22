@@ -256,7 +256,31 @@ export const FLASHCARDS_PROGRAMMING: FlashcardData[] = [
     `,
     category: 'Programming',
   },
+  {
+    question: 'What is SSR and SSG? What are the differences? Can you combine them?',
+    answer: `
+    SSR (Server-Side Rendering)
+    - HTML is generated on the server for each request
+    - Great for dynamic, user-specific pages (auth, dashboard)
+    - Improves SEO and first paint speed
 
+    SSG (Static Site Generation)
+    - HTML is prebuilt at build time and served as static files
+    - Very fast and scalable, but not suited for highly dynamic content
+    - Perfect for blogs, docs, marketing pages
+
+    Differences:
+    - SSR runs on *every request*, SSG runs *once at build time*
+    - SSR supports real-time data, SSG is limited to snapshot at build
+
+    Can they be combined?
+    - Yes, frameworks (Angular Universal, Next.js, Nuxt) support hybrid rendering:
+    *** SSG for static parts (marketing pages)
+    *** SSR for dynamic/user-specific parts (dashboards, profile pages)
+    - This is often called ISR (Incremental Static Regeneration) or hybrid rendering.
+    `,
+    category: 'Programming'
+  }
   // {
   //   question: '',
   //   answer: ``,

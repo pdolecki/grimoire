@@ -7,6 +7,8 @@ import {
 } from '@angular/core';
 import { Button } from '../../shared/ui/button';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { distinctUntilChanged, map } from 'rxjs';
 
 @Component({
   selector: 'app-toolbar',
@@ -17,7 +19,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
       <app-button
         size="small"
         variant="secondary"
-        [label]="isNarrow ? 'All' : 'Select all'"
+        [label]="isNarrow() ? 'All' : 'Select all'"
         (click)="selectAll.emit()"
       ></app-button>
       <app-button
@@ -31,7 +33,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
       </span>
       <app-button
         size="small"
-        [label]="isNarrow ? 'Start' : 'Start Learning'"
+        [label]="isNarrow() ? 'Start' : 'Start Learning'"
         (click)="startLearning.emit()"
       ></app-button>
     </div>
@@ -73,6 +75,11 @@ export class Toolbar {
   readonly clear = output<void>();
 
   private readonly breakpointObserver = inject(BreakpointObserver);
-  protected readonly isNarrow =
-    this.breakpointObserver.isMatched('(max-width: 768px)');
+  protected readonly isNarrow = toSignal(
+    this.breakpointObserver.observe('(max-width: 768px)').pipe(
+      map((state) => state.matches),
+      distinctUntilChanged()
+    ),
+    { initialValue: this.breakpointObserver.isMatched('(max-width: 768px)') }
+  );
 }

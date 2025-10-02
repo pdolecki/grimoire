@@ -2,7 +2,7 @@
 
 Live Demo: https://pd-grimoire.netlify.app
 
-**Crpt** is a lightweight Angular 20 application for learning new developer tools and storing all of my knowledge. It uses modern Angular features and applies best practises in architecture, Angular Material, and performance.
+**Grimoire** is a lightweight Angular 20 application for learning new developer tools and storing all of my knowledge. It uses modern Angular features and applies best practises in architecture, Angular Material, and performance.
 
 App generated with:
 > ng new grimoire --defaults --style=scss --standalone --routing --inline-template --inline-style

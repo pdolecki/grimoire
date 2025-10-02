@@ -8,9 +8,7 @@ import { Badge } from '../../shared/ui/badge';
   imports: [Badge],
   template: `
     <article class="flashcard">
-      @for (category of flashcard().category; track $index) {
-      <app-badge [label]="category"></app-badge>
-      }
+      <app-badge [label]="flashcard().category"></app-badge>
 
       <h2 class="flashcard__question">
         {{ flashcard().question }}

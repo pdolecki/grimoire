@@ -11,7 +11,7 @@ App generated with:
 
 - 📈 Character development calculators
 - 🧠 Clean reactive store using Angular 20 signals & `httpResource`
-- 🧮 Ability to search informations on talents, skills, effects etc.
+- 🧮 Ability to search information on talents, skills, effects etc.
 - 📦 Lazy loaded components, to make UI load faster
 - 💅 Styling based on Angular Material custom theme
 

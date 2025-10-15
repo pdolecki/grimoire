@@ -18,8 +18,6 @@ import { Badge } from '../../shared/ui/badge';
         <app-badge [label]="tag()"></app-badge>
       </div>
 
-      <img [src]="cover()" class="article__cover" />
-
       <header>
         <app-section-header
           [title]="title()"
@@ -40,9 +38,6 @@ import { Badge } from '../../shared/ui/badge';
           gap: var(--sz-10);
           padding: var(--sz-16);
         }
-        &__cover {
-          width: 100%;
-        }
         &__content {
           height: 100%;
           color: var(--cl-light-06);
@@ -60,7 +55,6 @@ import { Badge } from '../../shared/ui/badge';
   ],
 })
 export class Article {
-  readonly cover = input.required<string>();
   readonly title = input.required<string>();
   readonly description = input.required<string>();
   readonly tag = input.required<string>();

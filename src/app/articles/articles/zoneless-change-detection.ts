@@ -9,7 +9,6 @@ import { Article } from '../ui/article';
       title="Zoneless Change Detection: When & How"
       description="Run Angular without zone.js, safely. Pitfalls, patterns, and checklists."
       [tag]="'Angular'"
-      cover="/articles/zoneless-change-detection.png"
     >
       <h2>When Zoneless Makes Sense</h2>
       <p>

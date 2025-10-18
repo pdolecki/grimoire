@@ -8,7 +8,7 @@ import { Article } from '../ui/article';
     <app-article
       title="Angular Habits for Senior Developers"
       description="What should we consider if we to advance as a developers."
-      tag="'Angular'"
+      [tags]="['Angular']"
     >
       <h2>1. Control Renders</h2>
       <p>

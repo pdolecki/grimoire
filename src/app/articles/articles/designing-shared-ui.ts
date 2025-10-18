@@ -8,7 +8,7 @@ import { Article } from '../ui/article';
     <app-article
       title="Designing a Shared UI Library that Ages Well"
       description="Naming, boundaries, and tiny components that scale."
-      [tag]="'Angular'"
+      [tags]="['Angular']"
     >
       <h2>Start Small and Purposeful</h2>
       <p>

@@ -15,7 +15,9 @@ import { Badge } from '../../shared/ui/badge';
   template: `
     <section class="article">
       <div class="article__tags">
-        <app-badge [label]="tag()"></app-badge>
+        @for (tag of tags(); track tag) {
+          <app-badge [label]="tag"></app-badge>
+        }
       </div>
 
       <header>
@@ -57,5 +59,5 @@ import { Badge } from '../../shared/ui/badge';
 export class Article {
   readonly title = input.required<string>();
   readonly description = input.required<string>();
-  readonly tag = input.required<string>();
+  readonly tags = input.required<string[]>();
 }

@@ -118,16 +118,16 @@ import { Article } from '../ui/article';
         improvement for heavy lists and lower memory usage.
       </p>
 
-      <h3>
+      <h2>
         6. Strict Types, Small Interfaces, Single Responsibility Services.
-      </h3>
+      </h2>
       <p>
         Weak typing that we introduce allows runtime surprises and encourages
         passing props ad hoc. We can simply fix it by enabling TypeScript strict
         settings, preferring smaller interfaces and keeping services focused on
         only one responsibility.
       </p>
-      <h2>What we gain?</h2>
+      <h3>What we gain?</h3>
       <p>
         Before our runtime errors surfaced as subtle bugs in production for
         malformed response shapes. After tsc catches shape mismatches at build
